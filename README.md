@@ -12,7 +12,7 @@ To install and run on your personal computer you will need to do the following:
     ```zsh
     pip install -r requirements.txt
     ```
-3. Migrate and seed database.
+3. Migrate and seed database (see Note 1).
     ```zsh
     $ python3 manage.py migrate
     $ python3 manage.py loaddata user.json
@@ -23,7 +23,7 @@ To install and run on your personal computer you will need to do the following:
     ```
 5. Navigate to <http://localhost:8000/api/v1/>
 
-Note: If you have not set up the venv for python all commands that say `python3` should be replaced with `./.venv/bin/python3.13`.
+Note 1: If you have not set up the venv for python all commands that say `python3` should be replaced with `./.venv/bin/python3.13`.
 
 <br />
 
