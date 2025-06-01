@@ -23,6 +23,8 @@ To install and run on your personal computer you will need to do the following:
     ```
 5. Navigate to <http://localhost:8000/api/v1/>
 
+Note: If you have not set up the venv for python all commands that say `python3` should be replaced with `./.venv/bin/python3.13`.
+
 <br />
 
 <!-- API ENDPOINTS -->
