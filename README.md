@@ -38,7 +38,7 @@ Note 2: If you are getting an error about the database 'study_swamp_db' not exis
 <summary> <code>localhost:8000/api/v1/user</code> </summary>
 
 >**Description**
-> - Get a list of restaurants.
+> - Get a list of users.
 >
 >**Parameters**
 > - N/A
