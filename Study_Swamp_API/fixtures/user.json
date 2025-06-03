@@ -3,7 +3,8 @@
     "model": "Study_Swamp_API.user",
     "pk": 1,
     "fields": {
-      "name": "Hello World"
+      "name": "Hello World",
+      "user_type": 1
     }
   }
 ]
