@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Study_Swamp_API.member",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "group": 1
+    }
+  },
+  {
+    "model": "Study_Swamp_API.member",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "group": 2
+    }
+  },
+  {
+    "model": "Study_Swamp_API.member",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "group": 2
+    }
+  }
+]

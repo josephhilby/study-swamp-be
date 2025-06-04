@@ -1,0 +1,16 @@
+[
+  {
+    "model": "Study_Swamp_API.group",
+    "pk": 1,
+    "fields": {
+      "name": "group one"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.group",
+    "pk": 2,
+    "fields": {
+      "name": "group two"
+    }
+  }
+]
