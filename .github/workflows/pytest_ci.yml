@@ -12,7 +12,7 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: hero
-          POSTGRES_PASSWORD: passowrd
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: study_swamp_db
         ports:
           - 5432:5432
