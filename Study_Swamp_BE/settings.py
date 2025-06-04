@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'Study_Swamp_API',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'Study_Swamp_API.apps.StudySwampApiConfig',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +87,9 @@ DATABASES = {
 		'PASSWORD' : 'password',
 		'HOST' : 'localhost',
 		'PORT' : '5432',
+        'TEST' : {
+            'NAME': 'test_study_swamp_db',
+        },
 	}
 }
 
