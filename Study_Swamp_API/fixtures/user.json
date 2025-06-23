@@ -3,16 +3,26 @@
     "model": "Study_Swamp_API.user",
     "pk": 1,
     "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$600000$5yeNSmmxbNMc$wUay2In3PknTRlUooCk6+XXdUO3r9wWz5iK1P7YyEW4=\n",
       "name": "admin user",
-      "user_type": "ADMIN"
+      "user_type": "ADMIN",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
     }
   },
   {
     "model": "Study_Swamp_API.user",
     "pk": 2,
     "fields": {
+      "username": "student",
+      "password": "pbkdf2_sha256$600000$uvU3l8NiX5Ll$5UYYEVXSe7NHK7tDGg3NFiHcRAzT8pYIzKRRw4aMHQw=",
       "name": "student user",
-      "user_type": "STUDENT"
+      "user_type": "STUDENT",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
     }
   }
 ]
