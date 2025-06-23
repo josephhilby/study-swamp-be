@@ -6,6 +6,8 @@ router = routers.DefaultRouter()
 router.register(r'user', views.UserViewSet)
 router.register('group', views.GroupViewSet)
 router.register('member', views.MemberViewSet)
+router.register('meeting', views.MeetingViewSet)
+router.register('attendee', views.AttendeeViewSet)
 
 urlpatterns = [
 	path('api/v1/', include(router.urls)),

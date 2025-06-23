@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "meeting": 1
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "meeting": 2
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "meeting": 2
+    }
+  }
+]

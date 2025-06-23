@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import User, Group, Member
-from .serializers import UserSerializer, GroupSerializer, MemberSerializer
+from .models import User, Group, Member, Meeting, Attendee
+from .serializers import UserSerializer, GroupSerializer, MemberSerializer, MeetingSerializer, AttendeeSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -15,3 +15,11 @@ class GroupViewSet(viewsets.ModelViewSet):
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+
+class MeetingViewSet(viewsets.ModelViewSet):
+    queryset = Meeting.objects.all()
+    serializer_class = MeetingSerializer
+
+class AttendeeViewSet(viewsets.ModelViewSet):
+    queryset = Attendee.objects.all()
+    serializer_class = AttendeeSerializer

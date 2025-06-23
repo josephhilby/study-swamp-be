@@ -18,3 +18,18 @@ class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['user', 'group']
+
+class MeetingSerializer(serializers.ModelSerializer):
+    group = GroupSerializer(read_only=True)
+
+    class Meta:
+        model = Meeting
+        fields = ['name', 'group']
+
+class AttendeeSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    meeting = MeetingSerializer(read_only=True)
+
+    class Meta:
+        model = Attendee
+        fields = ['user', 'meeting']

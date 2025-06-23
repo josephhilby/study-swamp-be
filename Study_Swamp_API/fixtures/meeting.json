@@ -1,0 +1,18 @@
+[
+  {
+    "model": "Study_Swamp_API.meeting",
+    "pk": 1,
+    "fields": {
+      "name": "meeting one",
+      "group": 1
+    }
+  },
+  {
+    "model": "Study_Swamp_API.meeting",
+    "pk": 2,
+    "fields": {
+      "name": "meeting two",
+      "group": 2
+    }
+  }
+]
