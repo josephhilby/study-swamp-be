@@ -42,6 +42,8 @@ Note 1: If you have not set up the venv for python all commands that say `python
 
 Note 2: If you are getting an error about the database 'study_swamp_db' not existing. Run the command `psql` to enter PostgreSQL, then `CREATE DATABASE study_swamp_db OWNER hero;` you should see the response 'CREATE DATABASE', then type `\q` to exit.
 
+6. Login with username: admin, password: password123
+
 <br />
 
 <!-- API ENDPOINTS -->
