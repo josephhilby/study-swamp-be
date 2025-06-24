@@ -4,9 +4,10 @@ from .models import User, Location, Group, Member, Meeting, Attendee, Badge, Awa
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['username', 'password', 'email', 'first_name', 'last_name']
         extra_kwargs = {
             'is_superuser': {'read_only': True},
+            'password': {'write_only': True},
         }
 
     def to_representation(self, instance):
