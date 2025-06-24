@@ -4,9 +4,10 @@
     "pk": 1,
     "fields": {
       "username": "admin",
-      "password": "pbkdf2_sha256$600000$5yeNSmmxbNMc$wUay2In3PknTRlUooCk6+XXdUO3r9wWz5iK1P7YyEW4=\n",
-      "name": "admin user",
-      "user_type": "ADMIN",
+      "password": "pbkdf2_sha256$1000000$Gv9rDU1hXuRU2JXedAeoFR$rDe3oPqL307NcMDV7kjut1HacpyeZ8CcnUdrYIGNCuA=",
+      "first_name": "admin",
+      "last_name": "user",
+      "email": "admin@user.com",
       "is_superuser": true,
       "is_staff": true,
       "is_active": true
@@ -18,8 +19,9 @@
     "fields": {
       "username": "student",
       "password": "pbkdf2_sha256$600000$uvU3l8NiX5Ll$5UYYEVXSe7NHK7tDGg3NFiHcRAzT8pYIzKRRw4aMHQw=",
-      "name": "student user",
-      "user_type": "STUDENT",
+      "first_name": "student",
+      "last_name": "user",
+      "email": "student@user.com",
       "is_superuser": false,
       "is_staff": false,
       "is_active": true
