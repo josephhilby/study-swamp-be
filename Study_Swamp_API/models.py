@@ -52,7 +52,6 @@ class Meeting(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-
 class Attendee(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
@@ -97,6 +96,7 @@ class MeetingComment(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class GroupComment(models.Model):
     class Meta:

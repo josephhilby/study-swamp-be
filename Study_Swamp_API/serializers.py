@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User, Location, Group, Member, Meeting, Attendee, Badge, Award, MeetingComment, GroupComment
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -16,6 +17,13 @@ class UserSerializer(serializers.ModelSerializer):
             rep.pop('is_superuser', None)
         return rep
 
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +36,7 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = '__all__'
 
+
 class MemberSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     group = GroupSerializer(read_only=True)
@@ -36,12 +45,14 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = '__all__'
 
+
 class MeetingSerializer(serializers.ModelSerializer):
     group = GroupSerializer(read_only=True)
 
     class Meta:
         model = Meeting
         fields = '__all__'
+
 
 class AttendeeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -61,6 +72,7 @@ class BadgeSerializer(serializers.ModelSerializer):
 class AwardSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     badge = BadgeSerializer(read_only=True)
+
     class Meta:
         model = Award
         fields = '__all__'
@@ -69,6 +81,7 @@ class AwardSerializer(serializers.ModelSerializer):
 class MeetingCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     meeting = MeetingSerializer(read_only=True)
+
     class Meta:
         model = MeetingComment
         fields = '__all__'
@@ -77,6 +90,7 @@ class MeetingCommentSerializer(serializers.ModelSerializer):
 class GroupCommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     group = GroupSerializer(read_only=True)
+
     class Meta:
         model = GroupComment
         fields = '__all__'

@@ -1,8 +1,13 @@
 from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import User, Location, Group, Member, Meeting, Attendee, Badge, Award, MeetingComment, GroupComment
-from .serializers import UserSerializer, LocationSerializer, GroupSerializer, MemberSerializer, MeetingSerializer, AttendeeSerializer, BadgeSerializer, AwardSerializer, MeetingCommentSerializer, GroupCommentSerializer
+from rest_framework.authentication import BasicAuthentication
+from .models import (User, Location, Group, Member,
+                     Meeting, Attendee, Badge,
+                     Award, MeetingComment, GroupComment)
+from .serializers import (UserSerializer, LocationSerializer, GroupSerializer,
+                          MemberSerializer, MeetingSerializer, AttendeeSerializer,
+                          BadgeSerializer, AwardSerializer, MeetingCommentSerializer,
+                          GroupCommentSerializer)
 
 
 class UserViewSet(viewsets.ModelViewSet):
