@@ -13,7 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        if not self.context['request'].user.is_superuser:
+        request = self.context.get('request')
+        if request and not request.user.is_superuser:
             rep.pop('is_superuser', None)
         return rep
 
