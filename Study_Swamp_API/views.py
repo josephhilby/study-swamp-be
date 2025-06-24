@@ -1,4 +1,3 @@
-# from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -7,7 +6,6 @@ from .serializers import UserSerializer, LocationSerializer, GroupSerializer, Me
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    # queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
