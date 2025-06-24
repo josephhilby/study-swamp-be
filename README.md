@@ -52,7 +52,7 @@ Note 2: If you are getting an error about the database 'study_swamp_db' not exis
 ### GET
 
 <details>
-<summary> <code>localhost:8000/api/v1/user</code> </summary>
+<summary> <code>localhost:8000/api/v1/users</code> </summary>
 
 >**Description**
 > - Get a list of users.
@@ -71,7 +71,10 @@ Note 2: If you are getting an error about the database 'study_swamp_db' not exis
 >       "id": "int",
 >       "attributes": 
 >         {
->           "name": "str"
+>           "username": "str",
+>           "email": "str",
+>           "first_name": "str",
+>           "last_name": "str"
 >         }
 >      },
 >      {"..."}
