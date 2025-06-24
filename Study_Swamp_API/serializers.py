@@ -5,6 +5,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name']
+        extra_kwargs = {
+            'is_superuser': {'read_only': True},
+        }
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        if not self.context['request'].user.is_superuser:
+            rep.pop('is_superuser', None)
+        return rep
 
 
 class LocationSerializer(serializers.ModelSerializer):
