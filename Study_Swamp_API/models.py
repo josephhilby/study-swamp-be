@@ -6,6 +6,8 @@ class User(AbstractUser):
     class Meta:
         app_label = 'Study_Swamp_API'
 
+    points = models.IntegerField(default=0)
+
 
 class Location(models.Model):
     class Meta:
@@ -56,9 +58,14 @@ class Attendee(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
+    class RSVP(models.IntegerChoices):
+        PENDING = 0, 'Pending'
+        ACCEPTED = 1, 'Accepted'
+        DECLINED = 2, 'Declined'
+
     user = models.ForeignKey(User, related_name='attendees', on_delete=models.CASCADE)
     meeting = models.ForeignKey(Meeting, related_name='attendees', on_delete=models.CASCADE)
-    rsvp = models.BooleanField(default=False)
+    rsvp = models.IntegerField(choices=RSVP.choices, default=RSVP.PENDING)
     creator = models.BooleanField(default=False)
     editor = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

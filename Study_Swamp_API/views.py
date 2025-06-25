@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import BasicAuthentication
 from .models import (User, Location, Group, Member,
                      Meeting, Attendee, Badge,
@@ -21,6 +21,11 @@ class UserViewSet(viewsets.ModelViewSet):
             return User.objects.all()
 
         return User.objects.filter(is_superuser=False)
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
 
 class LocationViewSet(viewsets.ModelViewSet):

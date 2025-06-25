@@ -15,7 +15,7 @@ class TestUser(TestCase):
     def test_user_serialize(self):
         data = self.serialized_user.data
         assert isinstance(data, dict)
-        assert len(data) == 4
+        assert len(data) == 6
         assert isinstance(data['username'], str)
         assert isinstance(data['email'], str)
         assert isinstance(data['first_name'], str)
