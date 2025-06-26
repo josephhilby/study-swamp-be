@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import User, Location, Group, Member, Meeting, Attendee, Badge, Award, MeetingComment, GroupComment
+from .models import (User, Location, Group,
+                     Member, Meeting, Attendee, Award,
+                     MeetingComment, GroupComment)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -40,59 +42,36 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    group = GroupSerializer(read_only=True)
-
     class Meta:
         model = Member
         fields = '__all__'
 
 
 class MeetingSerializer(serializers.ModelSerializer):
-    group = GroupSerializer(read_only=True)
-
     class Meta:
         model = Meeting
         fields = '__all__'
 
 
 class AttendeeSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    meeting = MeetingSerializer(read_only=True)
-
     class Meta:
         model = Attendee
         fields = '__all__'
 
 
-class BadgeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Badge
-        fields = '__all__'
-
-
 class AwardSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    badge = BadgeSerializer(read_only=True)
-
     class Meta:
         model = Award
         fields = '__all__'
 
 
 class MeetingCommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    meeting = MeetingSerializer(read_only=True)
-
     class Meta:
         model = MeetingComment
         fields = '__all__'
 
 
 class GroupCommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    group = GroupSerializer(read_only=True)
-
     class Meta:
         model = GroupComment
         fields = '__all__'

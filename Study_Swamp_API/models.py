@@ -25,7 +25,14 @@ class Group(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
+    class DEPT(models.TextChoices):
+        MAS = 'MAS', 'MAS'
+        CEN = 'CEN', 'CEN'
+        COP = 'COP', 'COP'
+
     name = models.CharField(max_length=50)
+    department = models.TextField(choices=DEPT.choices, default=DEPT.MAS)
+    class_number = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -36,16 +43,17 @@ class Member(models.Model):
 
     user = models.ForeignKey(User, related_name='members', on_delete=models.CASCADE)
     group = models.ForeignKey(Group, related_name='members', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
     creator = models.BooleanField(default=False)
     editor = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Meeting(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
-    group = models.ForeignKey(Group, related_name='meetings', on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, related_name='meetings', on_delete=models.CASCADE, null=True, blank=True)
     location = models.ForeignKey(Location, related_name='meetings', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     start_time = models.DateTimeField()
@@ -65,32 +73,29 @@ class Attendee(models.Model):
 
     user = models.ForeignKey(User, related_name='attendees', on_delete=models.CASCADE)
     meeting = models.ForeignKey(Meeting, related_name='attendees', on_delete=models.CASCADE)
-    rsvp = models.IntegerField(choices=RSVP.choices, default=RSVP.PENDING)
+    rsvp_type = models.IntegerField(choices=RSVP.choices, default=RSVP.PENDING)
+    checked_in = models.BooleanField(default=False)
     creator = models.BooleanField(default=False)
     editor = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Badge(models.Model):
-    class Meta:
-        app_label = 'Study_Swamp_API'
-
-    class BadgeType(models.IntegerChoices):
-        WELCOME = 1, 'Welcome'
-        ACHIEVER = 2, 'Achiever'
-        EXPERT = 3, 'Expert'
-
-    badge_type = models.IntegerField(choices=BadgeType.choices)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
 class Award(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
+    class BadgeType(models.IntegerChoices):
+        EGG_TOOTH = 0, 'Egg Tooth'
+        FIRST_SPLASH = 1, 'First Splash'
+        SNAP_TO_IT = 2, 'Snap to It!'
+        TAILGATOR = 3, 'TailGATOR'
+        GATOR_DONE = 4, 'Gator Done'
+        CHOMP_CHAMP = 5, 'Chomp Champ'
+
+
     user = models.ForeignKey(User, related_name='awards', on_delete=models.CASCADE)
-    badge = models.ForeignKey(Badge, related_name='awards', on_delete=models.CASCADE)
+    badge_type = models.IntegerField(choices=BadgeType.choices)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

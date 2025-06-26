@@ -3,24 +3,238 @@
     "model": "Study_Swamp_API.attendee",
     "pk": 1,
     "fields": {
-      "user": 1,
-      "meeting": 1
+      "user": 3,
+      "meeting": 1,
+      "creator": true,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
     }
   },
   {
     "model": "Study_Swamp_API.attendee",
     "pk": 2,
     "fields": {
-      "user": 1,
-      "meeting": 2
+      "user": 4,
+      "meeting": 1,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
     }
   },
   {
     "model": "Study_Swamp_API.attendee",
     "pk": 3,
     "fields": {
-      "user": 2,
-      "meeting": 2
+      "user": 5,
+      "meeting": 1,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 2,
+      "checked_in": false,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 4,
+    "fields": {
+      "user": 6,
+      "meeting": 2,
+      "creator": true,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": false,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 5,
+    "fields": {
+      "user": 3,
+      "meeting": 2,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 0,
+      "checked_in": false,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 6,
+    "fields": {
+      "user": 4,
+      "meeting": 3,
+      "creator": true,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "meeting": 3,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": false,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 8,
+    "fields": {
+      "user": 4,
+      "meeting": 4,
+      "creator": true,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 9,
+    "fields": {
+      "user": 7,
+      "meeting": 4,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 0,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 10,
+    "fields": {
+      "user": 3,
+      "meeting": 5,
+      "creator": true,
+      "editor": true,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 11,
+    "fields": {
+      "user": 7,
+      "meeting": 5,
+      "creator": false,
+      "editor": true,
+      "rsvp_type": 1,
+      "checked_in": false,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 12,
+    "fields": {
+      "user": 3,
+      "meeting": 6,
+      "creator": true,
+      "editor": true,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 13,
+    "fields": {
+      "user": 4,
+      "meeting": 6,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 14,
+    "fields": {
+      "user": 5,
+      "meeting": 6,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 15,
+    "fields": {
+      "user": 3,
+      "meeting": 7,
+      "creator": true,
+      "editor": true,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 16,
+    "fields": {
+      "user": 4,
+      "meeting": 7,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.attendee",
+    "pk": 17,
+    "fields": {
+      "user": 5,
+      "meeting": 7,
+      "creator": false,
+      "editor": false,
+      "rsvp_type": 1,
+      "checked_in": true,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
     }
   }
 ]

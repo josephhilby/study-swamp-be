@@ -8,6 +8,7 @@ Make sure you have the following installed on your system:
 
 * Python 3.13.3
 * Django 5.2.1
+* PostgreSQL
 
 ### Initial Setup
 
@@ -28,6 +29,12 @@ pip install -r requirements.txt
 ```bash
 python3 manage.py migrate
 python3 manage.py loaddata user.json
+python3 manage.py loaddata location.json
+python3 manage.py loaddata group.json
+python3 manage.py loaddata member.json
+python3 manage.py loaddata meeting.json
+python3 manage.py loaddata attendee.json
+python3 manage.py loaddata award.json
 ```
     
 4. Start a server.
@@ -42,7 +49,9 @@ Note 1: If you have not set up the venv for python all commands that say `python
 
 Note 2: If you are getting an error about the database 'study_swamp_db' not existing. Run the command `psql` to enter PostgreSQL, then `CREATE DATABASE study_swamp_db OWNER hero;` you should see the response 'CREATE DATABASE', then type `\q` to exit.
 
-6. Login with username: admin, password: password123
+6. Login with...
+  - username: `admin1`
+  - password: `password1`
 
 <br />
 

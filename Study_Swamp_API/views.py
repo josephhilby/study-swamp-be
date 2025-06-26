@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import BasicAuthentication
-from .models import (User, Location, Group, Member,
-                     Meeting, Attendee, Badge,
+from .models import (User, Location, Group,
+                     Member, Meeting, Attendee,
                      Award, MeetingComment, GroupComment)
 from .serializers import (UserSerializer, LocationSerializer, GroupSerializer,
                           MemberSerializer, MeetingSerializer, AttendeeSerializer,
-                          BadgeSerializer, AwardSerializer, MeetingCommentSerializer,
+                          AwardSerializer, MeetingCommentSerializer,
                           GroupCommentSerializer)
 
 
@@ -51,11 +51,6 @@ class MeetingViewSet(viewsets.ModelViewSet):
 class AttendeeViewSet(viewsets.ModelViewSet):
     queryset = Attendee.objects.all()
     serializer_class = AttendeeSerializer
-
-
-class BadgeViewSet(viewsets.ModelViewSet):
-    queryset = Badge.objects.all()
-    serializer_class = BadgeSerializer
 
 
 class AwardViewSet(viewsets.ModelViewSet):
