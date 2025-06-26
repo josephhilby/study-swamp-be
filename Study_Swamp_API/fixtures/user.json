@@ -3,16 +3,112 @@
     "model": "Study_Swamp_API.user",
     "pk": 1,
     "fields": {
-      "name": "admin user",
-      "user_type": "ADMIN"
+      "username": "admin1",
+      "password": "pbkdf2_sha256$1000000$EGLAfDcfhuusJC9YHlNtMx$f9a1kL3qncsLGWuVPI4TbqUEkxwi6RqvZt/4NKFWOuY=",
+      "first_name": "Jarett",
+      "last_name": "Lee",
+      "email": "admin1@test.com",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
     }
   },
   {
     "model": "Study_Swamp_API.user",
     "pk": 2,
     "fields": {
-      "name": "student user",
-      "user_type": "STUDENT"
+      "username": "admin2",
+      "password": "pbkdf2_sha256$1000000$d2na8ZBX22FpMfpuSDn4r8$xzNNk5oChP4qoaWEXwSLuVdrxj3IpSRbQk25V3j/u/Y=",
+      "first_name": "Giada",
+      "last_name": "Fields",
+      "email": "admin2@test.com",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 3,
+    "fields": {
+      "username": "user1",
+      "password": "pbkdf2_sha256$1000000$ACpoQ8RpKyyidKZ1BrFz8t$EYdgV2fcZnJEsPdlSGehjEkT06T9U4idj0LVfUNuiS4=",
+      "first_name": "Josie",
+      "last_name": "Vincent",
+      "email": "user1@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 4,
+    "fields": {
+      "username": "user2",
+      "password": "pbkdf2_sha256$1000000$N92oVOI6yemyyEOX8XsmDB$tSolYnvTDem6oELDkDfwTGdBSBv9o3XdzYB/vlpnQoU=",
+      "first_name": "Camila",
+      "last_name": "Hubbard",
+      "email": "user2@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 5,
+    "fields": {
+      "username": "user3",
+      "password": "pbkdf2_sha256$1000000$EKrIqqFXKxEub5UFfUl4Tz$t4zT/uyIaoP8ojGPVPGEELkS3n7nmqTmuJjH/nsx/nw=",
+      "first_name": "Micah",
+      "last_name": "Rivas",
+      "email": "user3@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 6,
+    "fields": {
+      "username": "user4",
+      "password": "pbkdf2_sha256$1000000$rwML1IceKiKyDKvDrELmJa$6QWiNobrRgGTYmXujJsXjyD31mVi7DgTc2wf2fWQet0=",
+      "first_name": "Carmelo",
+      "last_name": "Best",
+      "email": "user4@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 7,
+    "fields": {
+      "username": "user5",
+      "password": "pbkdf2_sha256$1000000$vffUl3TDmQg6LnCpSAfMFt$2odVyXlAhM0oNcknRP89YilJV3Rl2mwjItcgrHnwtnk=",
+      "first_name": "Rex",
+      "last_name": "Frost",
+      "email": "user5@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Study_Swamp_API.user",
+    "pk": 8,
+    "fields": {
+      "username": "user6",
+      "password": "pbkdf2_sha256$1000000$Mg6jGqRkSvLTwZMU0XL9gC$gWEkWsObeYwHGp87tk450ovzd2iUa0OCEpBfErxw3ac=",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "user6@test.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": false
     }
   }
 ]
