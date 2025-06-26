@@ -134,6 +134,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'Study_Swamp_API.User'
+
 REST_FRAMEWORK = {
 	'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
 	'DEFAULT_PAGINATION_CLASS':
@@ -143,6 +145,13 @@ REST_FRAMEWORK = {
 		'rest_framework.parsers.FormParser',
 		'rest_framework.parsers.MultiPartParser'
 	),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',  # Optional
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 	'DEFAULT_RENDERER_CLASSES': (
 		'rest_framework_json_api.renderers.JSONRenderer',
 		# If you're performance testing, you will want to use the browseable API

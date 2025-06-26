@@ -1,0 +1,35 @@
+[
+  {
+    "model": "Study_Swamp_API.group",
+    "pk": 1,
+    "fields": {
+      "name": "Gator Minds",
+      "department": "COP",
+      "class_number": 3536,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.group",
+    "pk": 2,
+    "fields": {
+      "name": "Orange & Blue Crew",
+      "department": "CEN",
+      "class_number": 3031,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  },
+  {
+    "model": "Study_Swamp_API.group",
+    "pk": 3,
+    "fields": {
+      "name": "Swamp Scholars",
+      "department": "MAS",
+      "class_number": 3114,
+      "created_at": "2025-01-23T16:00:00Z",
+      "updated_at": "2025-01-23T16:00:00Z"
+    }
+  }
+]
