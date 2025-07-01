@@ -79,18 +79,20 @@ WSGI_APPLICATION = 'Study_Swamp_BE.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import os
+
 DATABASES = {
-	'default': {
-	    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'study_swamp_db',
-		'USER' : 'hero',
-		'PASSWORD' : 'password',
-		'HOST' : 'localhost',
-		'PORT' : '5432',
-        'TEST' : {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('POSTGRES_DB', 'study_swamp_db'),
+        'USER': os.getenv('POSTGRES_USER', 'hero'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'password'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'TEST': {
             'NAME': 'test_study_swamp_db',
         },
-	}
+    }
 }
 
 # Password validation
