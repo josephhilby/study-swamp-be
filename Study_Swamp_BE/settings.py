@@ -85,7 +85,7 @@ DATABASES = {
 		'NAME': 'study_swamp_db',
 		'USER' : 'hero',
 		'PASSWORD' : 'password',
-		'HOST' : 'localhost',
+		'HOST' : 'db',
 		'PORT' : '5432',
         'TEST' : {
             'NAME': 'test_study_swamp_db',
