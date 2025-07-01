@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', 'study_swamp_db'),
         'USER': os.getenv('POSTGRES_USER', 'hero'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'password'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),  # Default to localhost for local runs
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
         'TEST': {
             'NAME': 'test_study_swamp_db',
