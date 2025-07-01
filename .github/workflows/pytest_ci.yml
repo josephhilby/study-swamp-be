@@ -40,19 +40,7 @@ jobs:
           flake8 .
         continue-on-error: true
       - name: Run Migrations
-        run: |
-          MAX_TRIES=30
-          COUNT=0
-          until pg_isready -h localhost -p 5432; do
-            COUNT=$((COUNT+1))
-            if [ $COUNT -ge $MAX_TRIES ]; then
-              echo "Postgres did not become ready in time."
-              exit 1
-            fi
-            echo "Waiting for postgres..."
-            sleep 5
-          done
-          python3 manage.py migrate
+        run: python3 manage.py migrate
       - name: Test with Pytest
         run: |
           pytest -s
