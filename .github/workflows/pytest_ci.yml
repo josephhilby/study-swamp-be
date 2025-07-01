@@ -47,7 +47,17 @@ jobs:
           flake8 .
         continue-on-error: true
       - name: Run Migrations
-        run: python3 manage.py migrate
+        run: |
+          echo "Checking Postgres availability..."
+          for i in {1..30}; do
+            if pg_isready -h $POSTGRES_HOST -p $POSTGRES_PORT; then
+              echo "Postgres is ready!"
+              break
+            fi
+            echo "Postgres not ready yet. Waiting..."
+            sleep 5
+          done
+          python3 manage.py migrate
       - name: Test with Pytest
         run: |
           pytest -s
