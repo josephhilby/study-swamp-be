@@ -27,6 +27,12 @@ services:
         python manage.py loaddata award.json &&
         python manage.py runserver 0.0.0.0:8000
       "
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: study_swamp_db
+      POSTGRES_USER: hero
+      POSTGRES_PASSWORD: password
+      POSTGRES_PORT: 5432
     volumes:
       - .:/app
     ports:
