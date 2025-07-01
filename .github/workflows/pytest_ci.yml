@@ -24,6 +24,13 @@ jobs:
       matrix:
         python-version: ["3.13.3"]
 
+    env:
+      POSTGRES_DB: study_swamp_db
+      POSTGRES_USER: hero
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
