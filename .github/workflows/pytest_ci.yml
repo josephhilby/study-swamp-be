@@ -43,7 +43,7 @@ jobs:
         run: |
           MAX_TRIES=30
           COUNT=0
-          until pg_isready -h db -p 5432; do
+          until pg_isready -h localhost -p 5432; do
             COUNT=$((COUNT+1))
             if [ $COUNT -ge $MAX_TRIES ]; then
               echo "Postgres did not become ready in time."
