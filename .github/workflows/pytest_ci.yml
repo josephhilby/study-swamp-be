@@ -14,8 +14,6 @@ jobs:
           POSTGRES_USER: hero
           POSTGRES_PASSWORD: password
           POSTGRES_DB: study_swamp_db
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready 
           --health-interval 10s 
@@ -41,8 +39,6 @@ jobs:
           pip install flake8
           flake8 .
         continue-on-error: true
-      - name: Print Postgres logs
-        run: docker logs $(docker ps -q --filter "name=db")
       - name: Run Migrations
         run: |
           MAX_TRIES=30
