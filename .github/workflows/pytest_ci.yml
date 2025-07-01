@@ -41,11 +41,20 @@ jobs:
           pip install flake8
           flake8 .
         continue-on-error: true
+      - name: Print Postgres logs
+        run: docker logs $(docker ps -q --filter "name=db")
       - name: Run Migrations
         run: |
+          MAX_TRIES=30
+          COUNT=0
           until pg_isready -h db -p 5432; do
+            COUNT=$((COUNT+1))
+            if [ $COUNT -ge $MAX_TRIES ]; then
+              echo "Postgres did not become ready in time."
+              exit 1
+            fi
             echo "Waiting for postgres..."
-            sleep 1
+            sleep 5
           done
           python3 manage.py migrate
       - name: Test with Pytest
