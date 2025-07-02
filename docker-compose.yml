@@ -1,23 +1,41 @@
 version: "3.9"
 
 services:
+
+  # ----------------------------------------------
+  # Postgres Database Service
+  # ----------------------------------------------
   db:
     image: postgres:15
     restart: always
+
+    # Environment variables used by the Postgres container
     environment:
       POSTGRES_DB: study_swamp_db
       POSTGRES_USER: hero
       POSTGRES_PASSWORD: password
+
+    # Persist database data between container restarts
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+    # Expose Postgres port to the host machine
     ports:
       - "5432:5432"
 
+  # ----------------------------------------------
+  # Django Web Application Service
+  # ----------------------------------------------
   web:
     build: .
+
+    # Shell command executed when the container starts
+    # - Runs migrations
+    # - Loads fixtures for initial data
+    # - Starts the Django development server
     command: >
       sh -c "
-        python manage.py migrate && 
+        python manage.py migrate &&
         python manage.py loaddata user.json &&
         python manage.py loaddata location.json &&
         python manage.py loaddata group.json &&
@@ -25,20 +43,32 @@ services:
         python manage.py loaddata meeting.json &&
         python manage.py loaddata attendee.json &&
         python manage.py loaddata award.json &&
-        python manage.py runserver 0.0.0.0:8000
+        python manage.py collectstatic --noinput &&
+        gunicorn Study_Swamp_BE.wsgi:application --bind 0.0.0.0:8000
       "
+
+    # Environment variables injected into Django
     environment:
       POSTGRES_HOST: db
       POSTGRES_DB: study_swamp_db
       POSTGRES_USER: hero
       POSTGRES_PASSWORD: password
       POSTGRES_PORT: 5432
+
+    # Mounts the project directory into the container for live code changes
     volumes:
       - .:/app
+
+    # Exposes the Django dev server on host port 8000
     ports:
       - "8000:8000"
+
+    # Ensures the web service waits for db to start
     depends_on:
       - db
 
+# ----------------------------------------------
+# Named Docker Volume for PostgreSQL Data
+# ----------------------------------------------
 volumes:
   postgres_data:
