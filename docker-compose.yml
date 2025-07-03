@@ -1,4 +1,17 @@
-version: "3.9"
+# ----------------------------------------------
+# First Run:
+#   docker compose build --no-cache
+#   docker compose up -d db web
+#   docker compose run --rm init
+#
+# Subsequent Runs:
+#   docker compose up -d db web
+#
+# To Stop:
+#   docker compose down
+#
+# Or use container-control.sh
+# ----------------------------------------------
 
 services:
 
@@ -19,33 +32,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-    # Expose Postgres port to the host machine
+    # Expose Postgres port to the host machine (host:container)
+    # Using 5433 to deconflict with local PostgreSQL
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   # ----------------------------------------------
   # Django Web Application Service
   # ----------------------------------------------
   web:
-    build: .
-
-    # Shell command executed when the container starts
-    # - Runs migrations
-    # - Loads fixtures for initial data
-    # - Starts the Django development server
-    command: >
-      sh -c "
-        python manage.py migrate &&
-        python manage.py loaddata user.json &&
-        python manage.py loaddata location.json &&
-        python manage.py loaddata group.json &&
-        python manage.py loaddata member.json &&
-        python manage.py loaddata meeting.json &&
-        python manage.py loaddata attendee.json &&
-        python manage.py loaddata award.json &&
-        python manage.py collectstatic --noinput &&
-        gunicorn Study_Swamp_BE.wsgi:application --bind 0.0.0.0:8000
-      "
+    build:
+      context: .
+    image: study-swamp-web
 
     # Environment variables injected into Django
     environment:
@@ -62,6 +60,40 @@ services:
     # Exposes the Django dev server on host port 8000
     ports:
       - "8000:8000"
+
+    # Ensures the web service waits for db to start
+    depends_on:
+      - db
+
+  # ----------------------------------------------
+  # Initial DB setup
+  # ----------------------------------------------
+  init:
+    image: study-swamp-web
+    command: >
+      sh -c "
+        python manage.py migrate &&
+        python manage.py loaddata user.json &&
+        python manage.py loaddata location.json &&
+        python manage.py loaddata group.json &&
+        python manage.py loaddata member.json &&
+        python manage.py loaddata meeting.json &&
+        python manage.py loaddata attendee.json &&
+        python manage.py loaddata award.json &&
+        python manage.py collectstatic --noinput
+      "
+
+    # Environment variables injected into Django
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: study_swamp_db
+      POSTGRES_USER: hero
+      POSTGRES_PASSWORD: password
+      POSTGRES_PORT: 5432
+
+    # Mounts the project directory into the container for live code changes
+    volumes:
+      - .:/app
 
     # Ensures the web service waits for db to start
     depends_on:
