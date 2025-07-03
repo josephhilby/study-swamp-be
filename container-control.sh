@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# make executable with: chmod +x docker-dev.sh
+# make executable with: chmod +x container-control.sh
 # Then use:
 #   ./container-control.sh build/start/stop...
 
@@ -33,6 +33,11 @@ case $COMMAND in
     docker compose down -v
     ;;
 
+  init)
+    echo "Running migrations and fixture loading..."
+    docker compose run --rm init
+    ;;
+
   logs)
     echo "Showing live logs..."
     docker compose logs -f
@@ -41,10 +46,11 @@ case $COMMAND in
   help|*)
     echo "Usage: $0 {build|start|stop|stop-all|logs}"
     echo ""
-    echo "  build      Build containers, start services, and run init"
-    echo "  start      Start db and web services (for regular dev use)"
-    echo "  stop       Stop all containers"
-    echo "  stop-all   Stop all containers and delete volumes"
+    echo "  build      Build, start, and run initial setup for database and web services"
+    echo "  start      Start services (for regular use)"
+    echo "  stop       Stop services (for regular use)"
+    echo "  stop-all   Stop services and delete volumes (db data)"
+    echo "  init       Run initial setup for database (run after stop-all)"
     echo "  logs       Show container logs"
     exit 1
     ;;
