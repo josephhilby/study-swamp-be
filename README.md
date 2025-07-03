@@ -6,9 +6,6 @@
 
 Make sure you have the following installed on your system:
 
-* Python 3.13.3
-* Django 5.2.1
-* PostgreSQL
 * Docker 28.1.1
 * Docker Compose 2.36.0
 
@@ -26,8 +23,11 @@ cd study-swamp-be
 3. Run:
 
 ```bash
-docker compose up --build
+chmod +x container-control.sh
+./container-control.sh build
 ```
+
+Note 1: You can run `./container-control.sh help` for more info.
 
 4. Navigate to <http://localhost:8000/api/v1/>
 
@@ -39,17 +39,16 @@ docker compose up --build
 
 <!-- API ENDPOINTS -->
 
-## API Endpoints
-### GET
+## Example API Endpoint
+### Headers
+- `'Authorization': 'Basic ${btoa("username:password")}'`
+- `'Accept': 'application/vnd.api+json'`
 
 <details>
-<summary> <code>localhost:8000/api/v1/users</code> </summary>
+<summary> <code>GET localhost:8000/api/v1/users</code> </summary>
 
 >**Description**
 > - Get a list of users.
->
->**Parameters**
-> - N/A
 >
 >**Response**
 >#### 200 OK
@@ -58,14 +57,16 @@ docker compose up --build
 > {
 >   "data": [
 >     {
->       "type": "str",
+>       "type": "User",
 >       "id": "int",
 >       "attributes": 
 >         {
 >           "username": "str",
 >           "email": "str",
 >           "first_name": "str",
->           "last_name": "str"
+>           "last_name": "str",
+>           "points": "int",
+>           "is_superuser": "bool"
 >         }
 >      },
 >      {"..."}
@@ -73,22 +74,60 @@ docker compose up --build
 > }
 >```
 >
->#### 404 Not Found
+>**Notes**
 >
->```json
->{
->   "errors": [
->     {
->       "detail": "Not found.",
->       "status": "404",
->       "code": "not_found"
->     }
->    ]
->}
+> * Student users will not see Admin user info at `api/v1/users`. Admin will see all users. 
+> * `is_superuser: bool` will only be seen by Admin users.
+
+</details>
+
+
+<details>
+<summary> <code>POST localhost:8000/api/v1/users</code> </summary>
+
+>**Description**
+> - Post a new user.
+> 
+>**Body**
+>
+> ```json
+> {
+>   "data": {
+>       "type": "User",
+>       "attributes": 
+>         {
+>           "username": "str",
+>           "password": "str",
+>           "email": "str",
+>           "first_name": "str",
+>           "last_name": "str"
+>         }
+>   }
+> }
+>```
+>
+>**Response**
+>#### 201 Created
+>
+> ```json
+> {
+>   "data": {
+>       "type": "User",
+>       "id": "int",
+>       "attributes": 
+>         {
+>           "username": "str",
+>           "email": "str",
+>           "first_name": "str",
+>           "last_name": "str",
+>           "points": "int"
+>         }
+>   }
+> }
 >```
 >
 >**Notes**
 >
-> * none... yet
+> * You will not be able to create Admin users.
 
 </details>
