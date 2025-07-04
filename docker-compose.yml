@@ -41,6 +41,7 @@ services:
   # Django Web Application Service
   # ----------------------------------------------
   web:
+    # Build image with Dockerfile, label study-swamp-web
     build:
       context: .
     image: study-swamp-web
@@ -69,6 +70,7 @@ services:
   # Initial DB setup
   # ----------------------------------------------
   init:
+    # Reference existing image study-swamp-web and run...
     image: study-swamp-web
     command: >
       sh -c "
