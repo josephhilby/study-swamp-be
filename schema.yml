@@ -1,0 +1,2359 @@
+openapi: 3.0.3
+info:
+  title: Your Project API
+  version: 1.0.0
+  description: Your project description
+paths:
+  /api/v1/attendees/:
+    get:
+      operationId: attendees_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - attendees
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAttendeeList'
+          description: ''
+    post:
+      operationId: attendees_create
+      tags:
+      - attendees
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+          description: ''
+  /api/v1/attendees/{id}/:
+    get:
+      operationId: attendees_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this attendee.
+        required: true
+      tags:
+      - attendees
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+          description: ''
+    put:
+      operationId: attendees_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this attendee.
+        required: true
+      tags:
+      - attendees
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Attendee'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+          description: ''
+    patch:
+      operationId: attendees_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this attendee.
+        required: true
+      tags:
+      - attendees
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedAttendee'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAttendee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAttendee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAttendee'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+          description: ''
+    delete:
+      operationId: attendees_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this attendee.
+        required: true
+      tags:
+      - attendees
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/awards/:
+    get:
+      operationId: awards_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - awards
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAwardList'
+          description: ''
+    post:
+      operationId: awards_create
+      tags:
+      - awards
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Award'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Award'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Award'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Award'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Award'
+          description: ''
+  /api/v1/awards/{id}/:
+    get:
+      operationId: awards_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this award.
+        required: true
+      tags:
+      - awards
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Award'
+          description: ''
+    put:
+      operationId: awards_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this award.
+        required: true
+      tags:
+      - awards
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Award'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Award'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Award'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Award'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Award'
+          description: ''
+    patch:
+      operationId: awards_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this award.
+        required: true
+      tags:
+      - awards
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedAward'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAward'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAward'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAward'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Award'
+          description: ''
+    delete:
+      operationId: awards_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this award.
+        required: true
+      tags:
+      - awards
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/group_comments/:
+    get:
+      operationId: group_comments_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - group_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupCommentList'
+          description: ''
+    post:
+      operationId: group_comments_create
+      tags:
+      - group_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/GroupComment'
+          description: ''
+  /api/v1/group_comments/{id}/:
+    get:
+      operationId: group_comments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group comment.
+        required: true
+      tags:
+      - group_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/GroupComment'
+          description: ''
+    put:
+      operationId: group_comments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group comment.
+        required: true
+      tags:
+      - group_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GroupComment'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/GroupComment'
+          description: ''
+    patch:
+      operationId: group_comments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group comment.
+        required: true
+      tags:
+      - group_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupComment'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/GroupComment'
+          description: ''
+    delete:
+      operationId: group_comments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group comment.
+        required: true
+      tags:
+      - group_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/groups/:
+    get:
+      operationId: groups_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - groups
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGroupList'
+          description: ''
+    post:
+      operationId: groups_create
+      tags:
+      - groups
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Group'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Group'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+  /api/v1/groups/{id}/:
+    get:
+      operationId: groups_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - groups
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+    put:
+      operationId: groups_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - groups
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Group'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Group'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+    patch:
+      operationId: groups_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - groups
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroup'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGroup'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: ''
+    delete:
+      operationId: groups_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this group.
+        required: true
+      tags:
+      - groups
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/locations/:
+    get:
+      operationId: locations_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - locations
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationList'
+          description: ''
+    post:
+      operationId: locations_create
+      tags:
+      - locations
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Location'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+  /api/v1/locations/{id}/:
+    get:
+      operationId: locations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this location.
+        required: true
+      tags:
+      - locations
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    put:
+      operationId: locations_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this location.
+        required: true
+      tags:
+      - locations
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Location'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    patch:
+      operationId: locations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this location.
+        required: true
+      tags:
+      - locations
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLocation'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+    delete:
+      operationId: locations_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this location.
+        required: true
+      tags:
+      - locations
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/meeting_comments/:
+    get:
+      operationId: meeting_comments_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - meeting_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMeetingCommentList'
+          description: ''
+    post:
+      operationId: meeting_comments_create
+      tags:
+      - meeting_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/MeetingComment'
+          description: ''
+  /api/v1/meeting_comments/{id}/:
+    get:
+      operationId: meeting_comments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting comment.
+        required: true
+      tags:
+      - meeting_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/MeetingComment'
+          description: ''
+    put:
+      operationId: meeting_comments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting comment.
+        required: true
+      tags:
+      - meeting_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MeetingComment'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/MeetingComment'
+          description: ''
+    patch:
+      operationId: meeting_comments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting comment.
+        required: true
+      tags:
+      - meeting_comments
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedMeetingComment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMeetingComment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMeetingComment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMeetingComment'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/MeetingComment'
+          description: ''
+    delete:
+      operationId: meeting_comments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting comment.
+        required: true
+      tags:
+      - meeting_comments
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/meetings/:
+    get:
+      operationId: meetings_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - meetings
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMeetingList'
+          description: ''
+    post:
+      operationId: meetings_create
+      tags:
+      - meetings
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+          description: ''
+  /api/v1/meetings/{id}/:
+    get:
+      operationId: meetings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting.
+        required: true
+      tags:
+      - meetings
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+          description: ''
+    put:
+      operationId: meetings_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting.
+        required: true
+      tags:
+      - meetings
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Meeting'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+          description: ''
+    patch:
+      operationId: meetings_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting.
+        required: true
+      tags:
+      - meetings
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedMeeting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMeeting'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMeeting'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMeeting'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Meeting'
+          description: ''
+    delete:
+      operationId: meetings_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this meeting.
+        required: true
+      tags:
+      - meetings
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/members/:
+    get:
+      operationId: members_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - members
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMemberList'
+          description: ''
+    post:
+      operationId: members_create
+      tags:
+      - members
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Member'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Member'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+  /api/v1/members/{id}/:
+    get:
+      operationId: members_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this member.
+        required: true
+      tags:
+      - members
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    put:
+      operationId: members_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this member.
+        required: true
+      tags:
+      - members
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Member'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Member'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    patch:
+      operationId: members_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this member.
+        required: true
+      tags:
+      - members
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMember'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          description: ''
+    delete:
+      operationId: members_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this member.
+        required: true
+      tags:
+      - members
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/:
+    get:
+      operationId: users_list
+      parameters:
+      - name: filter[search]
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - name: page[number]
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page[size]
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: sort
+        required: false
+        in: query
+        description: '[list of fields to sort by](https://jsonapi.org/format/#fetching-sorting)'
+        schema:
+          type: string
+      tags:
+      - users
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
+          description: ''
+    post:
+      operationId: users_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/v1/users/{id}/:
+    get:
+      operationId: users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Attendee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rsvp_type:
+          allOf:
+          - $ref: '#/components/schemas/RsvpTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        checked_in:
+          type: boolean
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        meeting:
+          type: integer
+      required:
+      - created_at
+      - id
+      - meeting
+      - updated_at
+      - user
+    Award:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        badge_type:
+          allOf:
+          - $ref: '#/components/schemas/BadgeTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+      required:
+      - badge_type
+      - created_at
+      - id
+      - user
+    BadgeTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+      description: |-
+        * `0` - Egg Tooth
+        * `1` - First Splash
+        * `2` - Snap to It!
+        * `3` - TailGATOR
+        * `4` - Gator Done
+        * `5` - Chomp Champ
+    DepartmentEnum:
+      enum:
+      - MAS
+      - CEN
+      - COP
+      type: string
+      description: |-
+        * `MAS` - MAS
+        * `CEN` - CEN
+        * `COP` - COP
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        department:
+          $ref: '#/components/schemas/DepartmentEnum'
+        class_number:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - class_number
+      - created_at
+      - id
+      - name
+      - updated_at
+    GroupComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - created_at
+      - group
+      - id
+      - text
+      - updated_at
+      - user
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        building:
+          type: string
+          maxLength: 50
+        room:
+          type: string
+          maxLength: 50
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - building
+      - created_at
+      - id
+      - latitude
+      - longitude
+      - room
+      - updated_at
+    Meeting:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        group:
+          type: integer
+          nullable: true
+        location:
+          type: integer
+      required:
+      - created_at
+      - end_time
+      - id
+      - location
+      - name
+      - start_time
+      - updated_at
+    MeetingComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        meeting:
+          type: integer
+      required:
+      - created_at
+      - id
+      - meeting
+      - text
+      - updated_at
+      - user
+    Member:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - created_at
+      - group
+      - id
+      - updated_at
+      - user
+    PaginatedAttendeeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendee'
+    PaginatedAwardList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Award'
+    PaginatedGroupCommentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupComment'
+    PaginatedGroupList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    PaginatedLocationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+    PaginatedMeetingCommentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeetingComment'
+    PaginatedMeetingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meeting'
+    PaginatedMemberList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+    PaginatedUserList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page[number]=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PatchedAttendee:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rsvp_type:
+          allOf:
+          - $ref: '#/components/schemas/RsvpTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        checked_in:
+          type: boolean
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        meeting:
+          type: integer
+    PatchedAward:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        badge_type:
+          allOf:
+          - $ref: '#/components/schemas/BadgeTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+    PatchedGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        department:
+          $ref: '#/components/schemas/DepartmentEnum'
+        class_number:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedGroupComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+    PatchedLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        building:
+          type: string
+          maxLength: 50
+        room:
+          type: string
+          maxLength: 50
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedMeeting:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        group:
+          type: integer
+          nullable: true
+        location:
+          type: integer
+    PatchedMeetingComment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        meeting:
+          type: integer
+    PatchedMember:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+    PatchedUser:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        points:
+          type: integer
+          readOnly: true
+        is_superuser:
+          type: boolean
+          readOnly: true
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+    RsvpTypeEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      description: |-
+        * `0` - Pending
+        * `1` - Accepted
+        * `2` - Declined
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        points:
+          type: integer
+          readOnly: true
+        is_superuser:
+          type: boolean
+          readOnly: true
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+      required:
+      - is_superuser
+      - password
+      - points
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
