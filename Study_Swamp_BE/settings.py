@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # Third-party
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 
     # Django built-in
     'django.contrib.admin',
@@ -99,7 +101,7 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER', 'hero'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'password'),
         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'PORT': os.getenv('POSTGRES_PORT', '5433'),
         'TEST': {
             'NAME': 'test_study_swamp_db',
         },
@@ -165,6 +167,9 @@ AUTH_USER_MODEL = 'Study_Swamp_API.User'
 # ---------------------------------------------------------
 
 REST_FRAMEWORK = {
+    # AutoSchema for DRF Spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
     # JSON:API exception formatting
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
 
@@ -215,4 +220,84 @@ REST_FRAMEWORK = {
         'rest_framework_json_api.renderers.JSONRenderer',
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
+}
+
+
+# ---------------------------------------------------------
+# DRF SPECTACULAR SETTINGS
+# ---------------------------------------------------------
+
+SPECTACULAR_SETTINGS = {
+    # ------------------------------
+    # BASIC API INFO
+    # ------------------------------
+
+    # Title for your API documentation
+    'TITLE': 'Study Swamp API',
+
+    # Short description shown in schema docs (update this!)
+    'DESCRIPTION': 'To-Do',
+
+    # API version string
+    'VERSION': '1.0.0',
+
+    # API auth
+    'SECURITY_DEFINITIONS': {
+        'basicAuth': {
+            'type': 'http',
+            'scheme': 'basic'
+        },
+    },
+    'DEFAULT_SECURITY': [{'basicAuth': []}],
+
+    # ------------------------------
+    # URL CONFIGURATION
+    # ------------------------------
+
+    # Tells spectacular to trim this prefix from paths in the schema
+    # so the generated paths match your routing under /api/v1/
+    'SCHEMA_PATH_PREFIX_TRIM': '/api/v1',
+
+    # If you use spectacular's built-in views, this is the URLconf it references
+    'SERVE_URLCONF': 'Study_Swamp_BE.urls',
+
+    # Sets the server base URL shown in the schema & Swagger UI
+    'SERVERS': [
+        {'url': 'http://localhost:8000/api'},
+    ],
+
+    # Controls whether the schema itself is included under /schema/ endpoint
+    'SERVE_INCLUDE_SCHEMA': False,
+
+    # ------------------------------
+    # UI FRONTENDS
+    # ------------------------------
+
+    # These settings tell drf-spectacular to use the "sidecar" static files
+    # rather than pulling Swagger or Redoc from public CDNs
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+
+    # Swagger UI specific tweaks
+    'SWAGGER_UI_SETTINGS': {
+        # Keeps endpoints collapsed initially
+        'docExpansion': 'none',
+
+        # Hides schemas section by default
+        'defaultModelsExpandDepth': -1,
+    },
+
+    # ------------------------------
+    # SCHEMA CLEANUP & ORGANIZATION
+    # ------------------------------
+
+    # Ensures operations are listed in alphabetical order under each tag
+    'SORT_OPERATIONS': True,
+
+    # Sorts parameters alphabetically inside each operation
+    'SORT_OPERATION_PARAMETERS': True,
+
+    # If True, request bodies are shown as a separate schema from the response
+    'COMPONENT_SPLIT_REQUEST': True,
 }
