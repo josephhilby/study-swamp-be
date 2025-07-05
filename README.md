@@ -32,16 +32,16 @@ Note 1: You can run `./container-control.sh help` for more info.
 4. Navigate to: <http://localhost:8000/api/v1/>
 
 5. Login with...
-  - Username: `admin1`
-  - Password: `password1`
+   - Username: `admin1`
+   - Password: `password1`
 
 6. Check the swagger docs: <http://localhost:8000/api/schema/swagger-ui/>
 
 7. Select 'Authorize 🔒'
-  - basicAuth
-    - Username: `admin1`
-    - Password: `password1`
-  - Select 'Authorize', then close the window.
+   - basicAuth
+     - Username: `admin1`
+     - Password: `password1`
+   - Select 'Authorize', then close the window.
 
 <br />
 
