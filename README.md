@@ -29,11 +29,19 @@ chmod +x container-control.sh
 
 Note 1: You can run `./container-control.sh help` for more info.
 
-4. Navigate to <http://localhost:8000/api/v1/>
+4. Navigate to: <http://localhost:8000/api/v1/>
 
 5. Login with...
-  - username: `admin1`
-  - password: `password1`
+  - Username: `admin1`
+  - Password: `password1`
+
+6. Check the swagger docs: <http://localhost:8000/api/schema/swagger-ui/>
+
+7. Select 'Authorize 🔒'
+  - basicAuth
+    - Username: `admin1`
+    - Password: `password1`
+  - Select 'Authorize', then close the window.
 
 <br />
 
@@ -51,7 +59,7 @@ Note: Only add `'Content-Type': 'application/json'` for PUT/PATCH/POST requests.
 <summary> <code>GET localhost:8000/api/v1/users/</code> </summary>
 
 >**Description**
-> - Get a list of users. Or single user `GET localhost:8000/api/v1/users/:id`.
+> - Get a list of users. Or single user `GET localhost:8000/api/v1/users/:id/`.
 >
 >**Response**
 >#### 200 OK
@@ -72,14 +80,14 @@ Note: Only add `'Content-Type': 'application/json'` for PUT/PATCH/POST requests.
 >           "is_superuser": "bool"
 >         }
 >      },
->      {"..."}
+>      {...}
 >    ]
 > }
 >```
 >
 >**Notes**
 >
-> * Student users will not see Admin user info at `api/v1/users`. Admin will see all users. 
+> * Student users will not see Admin user info at `api/v1/users/`. Admin will see all users. 
 > * `is_superuser: bool` will only be seen by Admin users.
 
 </details>
@@ -191,3 +199,7 @@ Note: Only add `'Content-Type': 'application/json'` for PUT/PATCH/POST requests.
 > * None yet.
 
 </details>
+
+## Frontend
+
+This repo was created for a school project. The frontend repo can be found [here](https://github.com/nenaroig/study-swamp-ui).
