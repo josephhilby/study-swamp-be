@@ -1,0 +1,2 @@
+# Ignore staticfiles in the repo Languages stats
+/staticfiles/** linguist-generated
