@@ -187,7 +187,7 @@ REST_FRAMEWORK = {
     # Authentication mechanisms:
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',  # Optional browser login
+        # 'rest_framework.authentication.SessionAuthentication',
     ],
 
     # Default permissions: require authentication
