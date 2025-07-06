@@ -14,7 +14,7 @@ __pycache__/
 **/migrations/*.pyc
 
 # Virtual environments
-venv/
+.venv/
 
 # Environment variable files (if used)
 .env/
