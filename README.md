@@ -1,47 +1,67 @@
 # Study Swamp UI
 
+<!-- Overview -->
+
+## Project Overview
+
+This repository contains the backend for the Study Swamp project, built as part of the Introduction to Software Engineering (CEN 3031) course at the University of Florida.
+
+It consists of two containerized microservices:
+
+- A PostgreSQL database
+- A Django Rest Framework API
+
+The frontend is available here: [study-swamp-ui](https://github.com/nenaroig/study-swamp-ui)
+
+<!-- SETUP -->
+
 ## Project Setup & Initialization
 
 ### Prerequisites
 
-Make sure you have the following installed on your system:
+Ensure the following tools are installed:
 
-* Docker 28.1.1
-* Docker Compose 2.36.0
+* Docker `v28.1.1`, or later
+* Docker Compose `v2.36.0`, or later
 
 ### Initial Setup
 
-1. Fork and clone the repository:
+1. Clone your forked repository and navigate to the project root:
+    ```bash
+    git clone <your-forked-repo-url>
+    cd study-swamp-be
+    ```
 
-```bash
-git clone <your-forked-repo-url>
-cd study-swamp-be
-```
+2. Make the control script executable:
 
-2. Navigate to root (study-swamp-be)
+    ```bash
+    chmod +x container-control.sh
+    ```
 
-3. Run:
+3. Build and start the containers:
 
-```bash
-chmod +x container-control.sh
-./container-control.sh build
-```
+    ```bash
+    ./container-control.sh build
+    ```
 
-Note 1: You can run `./container-control.sh help` for more info.
+<div align="center">
 
-4. Navigate to: <http://localhost:8000/api/v1/>
+💡 Run `./container-control.sh help` to view additional commands.
 
-5. Login with...
-   - Username: `admin1`
-   - Password: `password1`
+</div>
 
-6. Check the swagger docs: <http://localhost:8000/api/schema/swagger-ui/>
 
-7. Select 'Authorize 🔒'
-   - basicAuth
-     - Username: `admin1`
-     - Password: `password1`
-   - Select 'Authorize', then close the window.
+4. Visit the API at: <http://localhost:8000/api/v1/>
+
+   - Log in using:
+      - Username: `admin1`
+      - Password: `password1`
+
+
+5. Access the Swagger docs at: <http://localhost:8000/api/schema/swagger-ui/>
+   - Select `'Authorize 🔒'` and use (username / password):
+      - Admin → `admin1` / `password1`, or Basic User → `user1` / `password3`.
+      - Select `'Authorize'`, then `close`.
 
 <br />
 
@@ -199,7 +219,3 @@ Note: Only add `'Content-Type': 'application/json'` for PUT/PATCH/POST requests.
 > * None yet.
 
 </details>
-
-## Frontend
-
-This repo was created for a school project. The frontend repo can be found [here](https://github.com/nenaroig/study-swamp-ui).
