@@ -1,0 +1,30 @@
+# To remove newly added .gitignore files
+# git rm -r --cached .
+# git add .
+# git commit -m "Remove all files now ignored"
+
+# Python bytecode cache
+__pycache__/
+*.py[cod]
+
+# Log files
+*.log
+
+# Compiled migration files (keep .py migration files tracked, but ignore .pyc)
+**/migrations/*.pyc
+
+# Virtual environments
+.venv/
+
+# Environment variable files (if used)
+.env/
+
+# VS Code editor settings
+.vscode/
+
+# PyCharm / IntelliJ IDEA project settings
+.idea/
+*.iml
+
+# macOS Finder metadata
+.DS_Store
