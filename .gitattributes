@@ -1,3 +1,19 @@
-# Ignore all files and folders in staticfiles from language stats
+# ------------------------
+# Mark generated code
+# ------------------------
+# staticfiles
 staticfiles/** linguist-generated
 staticfiles/* linguist-generated
+
+# migrations
+*/migrations/*.py linguist-generated
+!*/migrations/__init__.py linguist-generated=false
+
+# schema
+schema.yml linguist-generated
+
+# ------------------------
+# Mark documentation
+# ------------------------
+docs/** linguist-documentation
+*.md linguist-documentation
