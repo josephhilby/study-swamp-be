@@ -43,8 +43,15 @@ case $COMMAND in
     docker compose logs -f
     ;;
 
+  cleanup)
+    echo "Stopping and removing all containers, volumes, and images for this project..."
+    docker compose down -v --rmi all --remove-orphans
+    echo "Pruning dangling volumes (if any)..."
+    docker volume prune -f
+    ;;
+
   help|*)
-    echo "Usage: $0 {build|start|stop|stop-all|logs}"
+    echo "Usage: $0 {build|start|stop|stop-all|init|logs|cleanup}"
     echo ""
     echo "  build      Build, start, and run initial setup for database and web services"
     echo "  start      Start services (for regular use)"
@@ -52,6 +59,7 @@ case $COMMAND in
     echo "  stop-all   Stop services and delete volumes (db data)"
     echo "  init       Run initial setup for database (run after stop-all)"
     echo "  logs       Show container logs"
+    echo "  cleanup    Remove containers, volumes, and images (complete reset)"
     exit 1
     ;;
 esac
