@@ -1,6 +1,13 @@
 """
 Django settings for Study_Swamp_BE project.
 
+ In the future need to split the settings file into four
+ settings/...
+     base.py (for all env)
+     dev.py (debug on, local DB)
+     staging.py (debug off, staging DB, secure secrets)
+     production.py (debug off, prod DB, secure secrets)
+
 See:
 - https://docs.djangoproject.com/en/4.1/topics/settings/
 - https://docs.djangoproject.com/en/4.1/ref/settings/
@@ -28,6 +35,8 @@ SECRET_KEY = 'django-insecure-s@27u^(*bj8)f4(a-suj^itcynrtjqy73#up$^+!d#^l#qs*f$
 # don't run with debug turned on in production!
 DEBUG = True
 
+# SECURITY WARNING:
+# must limit allowed hosts to just the FE!
 ALLOWED_HOSTS = ["*"]
 
 
@@ -231,12 +240,13 @@ SPECTACULAR_SETTINGS = {
     # ------------------------------
     # BASIC API INFO
     # ------------------------------
+    # Update yml with: python3 manage.py spectacular --format=openapi --file=schema.yml
 
     # Title for your API documentation
     'TITLE': 'Study Swamp API',
 
     # Short description shown in schema docs (update this!)
-    'DESCRIPTION': 'To-Do',
+    'DESCRIPTION': 'Study Swamp API provides a collaborative platform for students to organize and participate in study groups, meetings, and academic communities. It enables users to join groups, RSVP and check in to meetings, earn points and badges, and engage through comments and interactions.',
 
     # API version string
     'VERSION': '1.0.0',
