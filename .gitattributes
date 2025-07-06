@@ -1,2 +1,3 @@
-# Ignore staticfiles in the repo Languages stats
-/staticfiles/** linguist-generated
+# Ignore all files and folders in staticfiles from language stats
+staticfiles/** linguist-generated
+staticfiles/* linguist-generated
