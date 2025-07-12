@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.authentication import BasicAuthentication
 from .models import (User, Location, Group,
                      Member, Meeting, Attendee,
                      Award, MeetingComment, GroupComment)
@@ -12,8 +11,6 @@ from .serializers import (UserSerializer, LocationSerializer, GroupSerializer,
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user

@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: Your Project API
+  title: Study Swamp API
   version: 1.0.0
-  description: Your project description
+  description: To-Do
 paths:
-  /api/v1/attendees/:
+  /v1/attendees/:
     get:
-      operationId: attendees_list
+      operationId: v1_attendees_list
       parameters:
       - name: filter[search]
         required: false
@@ -33,10 +33,9 @@ paths:
         schema:
           type: string
       tags:
-      - attendees
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -45,27 +44,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedAttendeeList'
           description: ''
     post:
-      operationId: attendees_create
+      operationId: v1_attendees_create
       tags:
-      - attendees
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -73,9 +71,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Attendee'
           description: ''
-  /api/v1/attendees/{id}/:
+  /v1/attendees/{id}/:
     get:
-      operationId: attendees_retrieve
+      operationId: v1_attendees_retrieve
       parameters:
       - in: path
         name: id
@@ -84,10 +82,9 @@ paths:
         description: A unique integer value identifying this attendee.
         required: true
       tags:
-      - attendees
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -96,7 +93,7 @@ paths:
                 $ref: '#/components/schemas/Attendee'
           description: ''
     put:
-      operationId: attendees_update
+      operationId: v1_attendees_update
       parameters:
       - in: path
         name: id
@@ -105,25 +102,24 @@ paths:
         description: A unique integer value identifying this attendee.
         required: true
       tags:
-      - attendees
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Attendee'
+              $ref: '#/components/schemas/AttendeeRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -132,7 +128,7 @@ paths:
                 $ref: '#/components/schemas/Attendee'
           description: ''
     patch:
-      operationId: attendees_partial_update
+      operationId: v1_attendees_partial_update
       parameters:
       - in: path
         name: id
@@ -141,24 +137,23 @@ paths:
         description: A unique integer value identifying this attendee.
         required: true
       tags:
-      - attendees
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedAttendee'
+              $ref: '#/components/schemas/PatchedAttendeeRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedAttendee'
+              $ref: '#/components/schemas/PatchedAttendeeRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedAttendee'
+              $ref: '#/components/schemas/PatchedAttendeeRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedAttendee'
+              $ref: '#/components/schemas/PatchedAttendeeRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -167,7 +162,7 @@ paths:
                 $ref: '#/components/schemas/Attendee'
           description: ''
     delete:
-      operationId: attendees_destroy
+      operationId: v1_attendees_destroy
       parameters:
       - in: path
         name: id
@@ -176,16 +171,15 @@ paths:
         description: A unique integer value identifying this attendee.
         required: true
       tags:
-      - attendees
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/awards/:
+  /v1/awards/:
     get:
-      operationId: awards_list
+      operationId: v1_awards_list
       parameters:
       - name: filter[search]
         required: false
@@ -212,10 +206,9 @@ paths:
         schema:
           type: string
       tags:
-      - awards
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -224,27 +217,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedAwardList'
           description: ''
     post:
-      operationId: awards_create
+      operationId: v1_awards_create
       tags:
-      - awards
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -252,9 +244,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Award'
           description: ''
-  /api/v1/awards/{id}/:
+  /v1/awards/{id}/:
     get:
-      operationId: awards_retrieve
+      operationId: v1_awards_retrieve
       parameters:
       - in: path
         name: id
@@ -263,10 +255,9 @@ paths:
         description: A unique integer value identifying this award.
         required: true
       tags:
-      - awards
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -275,7 +266,7 @@ paths:
                 $ref: '#/components/schemas/Award'
           description: ''
     put:
-      operationId: awards_update
+      operationId: v1_awards_update
       parameters:
       - in: path
         name: id
@@ -284,25 +275,24 @@ paths:
         description: A unique integer value identifying this award.
         required: true
       tags:
-      - awards
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Award'
+              $ref: '#/components/schemas/AwardRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -311,7 +301,7 @@ paths:
                 $ref: '#/components/schemas/Award'
           description: ''
     patch:
-      operationId: awards_partial_update
+      operationId: v1_awards_partial_update
       parameters:
       - in: path
         name: id
@@ -320,24 +310,23 @@ paths:
         description: A unique integer value identifying this award.
         required: true
       tags:
-      - awards
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedAward'
+              $ref: '#/components/schemas/PatchedAwardRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedAward'
+              $ref: '#/components/schemas/PatchedAwardRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedAward'
+              $ref: '#/components/schemas/PatchedAwardRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedAward'
+              $ref: '#/components/schemas/PatchedAwardRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -346,7 +335,7 @@ paths:
                 $ref: '#/components/schemas/Award'
           description: ''
     delete:
-      operationId: awards_destroy
+      operationId: v1_awards_destroy
       parameters:
       - in: path
         name: id
@@ -355,16 +344,15 @@ paths:
         description: A unique integer value identifying this award.
         required: true
       tags:
-      - awards
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/group_comments/:
+  /v1/group_comments/:
     get:
-      operationId: group_comments_list
+      operationId: v1_group_comments_list
       parameters:
       - name: filter[search]
         required: false
@@ -391,10 +379,9 @@ paths:
         schema:
           type: string
       tags:
-      - group_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -403,27 +390,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedGroupCommentList'
           description: ''
     post:
-      operationId: group_comments_create
+      operationId: v1_group_comments_create
       tags:
-      - group_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -431,9 +417,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/GroupComment'
           description: ''
-  /api/v1/group_comments/{id}/:
+  /v1/group_comments/{id}/:
     get:
-      operationId: group_comments_retrieve
+      operationId: v1_group_comments_retrieve
       parameters:
       - in: path
         name: id
@@ -442,10 +428,9 @@ paths:
         description: A unique integer value identifying this group comment.
         required: true
       tags:
-      - group_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -454,7 +439,7 @@ paths:
                 $ref: '#/components/schemas/GroupComment'
           description: ''
     put:
-      operationId: group_comments_update
+      operationId: v1_group_comments_update
       parameters:
       - in: path
         name: id
@@ -463,25 +448,24 @@ paths:
         description: A unique integer value identifying this group comment.
         required: true
       tags:
-      - group_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/GroupComment'
+              $ref: '#/components/schemas/GroupCommentRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -490,7 +474,7 @@ paths:
                 $ref: '#/components/schemas/GroupComment'
           description: ''
     patch:
-      operationId: group_comments_partial_update
+      operationId: v1_group_comments_partial_update
       parameters:
       - in: path
         name: id
@@ -499,24 +483,23 @@ paths:
         description: A unique integer value identifying this group comment.
         required: true
       tags:
-      - group_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedGroupComment'
+              $ref: '#/components/schemas/PatchedGroupCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedGroupComment'
+              $ref: '#/components/schemas/PatchedGroupCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedGroupComment'
+              $ref: '#/components/schemas/PatchedGroupCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedGroupComment'
+              $ref: '#/components/schemas/PatchedGroupCommentRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -525,7 +508,7 @@ paths:
                 $ref: '#/components/schemas/GroupComment'
           description: ''
     delete:
-      operationId: group_comments_destroy
+      operationId: v1_group_comments_destroy
       parameters:
       - in: path
         name: id
@@ -534,16 +517,15 @@ paths:
         description: A unique integer value identifying this group comment.
         required: true
       tags:
-      - group_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/groups/:
+  /v1/groups/:
     get:
-      operationId: groups_list
+      operationId: v1_groups_list
       parameters:
       - name: filter[search]
         required: false
@@ -570,10 +552,9 @@ paths:
         schema:
           type: string
       tags:
-      - groups
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -582,27 +563,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedGroupList'
           description: ''
     post:
-      operationId: groups_create
+      operationId: v1_groups_create
       tags:
-      - groups
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -610,9 +590,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Group'
           description: ''
-  /api/v1/groups/{id}/:
+  /v1/groups/{id}/:
     get:
-      operationId: groups_retrieve
+      operationId: v1_groups_retrieve
       parameters:
       - in: path
         name: id
@@ -621,10 +601,9 @@ paths:
         description: A unique integer value identifying this group.
         required: true
       tags:
-      - groups
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -633,7 +612,7 @@ paths:
                 $ref: '#/components/schemas/Group'
           description: ''
     put:
-      operationId: groups_update
+      operationId: v1_groups_update
       parameters:
       - in: path
         name: id
@@ -642,25 +621,24 @@ paths:
         description: A unique integer value identifying this group.
         required: true
       tags:
-      - groups
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Group'
+              $ref: '#/components/schemas/GroupRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -669,7 +647,7 @@ paths:
                 $ref: '#/components/schemas/Group'
           description: ''
     patch:
-      operationId: groups_partial_update
+      operationId: v1_groups_partial_update
       parameters:
       - in: path
         name: id
@@ -678,24 +656,23 @@ paths:
         description: A unique integer value identifying this group.
         required: true
       tags:
-      - groups
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedGroup'
+              $ref: '#/components/schemas/PatchedGroupRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedGroup'
+              $ref: '#/components/schemas/PatchedGroupRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedGroup'
+              $ref: '#/components/schemas/PatchedGroupRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedGroup'
+              $ref: '#/components/schemas/PatchedGroupRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -704,7 +681,7 @@ paths:
                 $ref: '#/components/schemas/Group'
           description: ''
     delete:
-      operationId: groups_destroy
+      operationId: v1_groups_destroy
       parameters:
       - in: path
         name: id
@@ -713,16 +690,15 @@ paths:
         description: A unique integer value identifying this group.
         required: true
       tags:
-      - groups
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/locations/:
+  /v1/locations/:
     get:
-      operationId: locations_list
+      operationId: v1_locations_list
       parameters:
       - name: filter[search]
         required: false
@@ -749,10 +725,9 @@ paths:
         schema:
           type: string
       tags:
-      - locations
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -761,27 +736,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedLocationList'
           description: ''
     post:
-      operationId: locations_create
+      operationId: v1_locations_create
       tags:
-      - locations
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -789,9 +763,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Location'
           description: ''
-  /api/v1/locations/{id}/:
+  /v1/locations/{id}/:
     get:
-      operationId: locations_retrieve
+      operationId: v1_locations_retrieve
       parameters:
       - in: path
         name: id
@@ -800,10 +774,9 @@ paths:
         description: A unique integer value identifying this location.
         required: true
       tags:
-      - locations
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -812,7 +785,7 @@ paths:
                 $ref: '#/components/schemas/Location'
           description: ''
     put:
-      operationId: locations_update
+      operationId: v1_locations_update
       parameters:
       - in: path
         name: id
@@ -821,25 +794,24 @@ paths:
         description: A unique integer value identifying this location.
         required: true
       tags:
-      - locations
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Location'
+              $ref: '#/components/schemas/LocationRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -848,7 +820,7 @@ paths:
                 $ref: '#/components/schemas/Location'
           description: ''
     patch:
-      operationId: locations_partial_update
+      operationId: v1_locations_partial_update
       parameters:
       - in: path
         name: id
@@ -857,24 +829,23 @@ paths:
         description: A unique integer value identifying this location.
         required: true
       tags:
-      - locations
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedLocation'
+              $ref: '#/components/schemas/PatchedLocationRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedLocation'
+              $ref: '#/components/schemas/PatchedLocationRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedLocation'
+              $ref: '#/components/schemas/PatchedLocationRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedLocation'
+              $ref: '#/components/schemas/PatchedLocationRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -883,7 +854,7 @@ paths:
                 $ref: '#/components/schemas/Location'
           description: ''
     delete:
-      operationId: locations_destroy
+      operationId: v1_locations_destroy
       parameters:
       - in: path
         name: id
@@ -892,16 +863,15 @@ paths:
         description: A unique integer value identifying this location.
         required: true
       tags:
-      - locations
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/meeting_comments/:
+  /v1/meeting_comments/:
     get:
-      operationId: meeting_comments_list
+      operationId: v1_meeting_comments_list
       parameters:
       - name: filter[search]
         required: false
@@ -928,10 +898,9 @@ paths:
         schema:
           type: string
       tags:
-      - meeting_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -940,27 +909,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedMeetingCommentList'
           description: ''
     post:
-      operationId: meeting_comments_create
+      operationId: v1_meeting_comments_create
       tags:
-      - meeting_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -968,9 +936,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/MeetingComment'
           description: ''
-  /api/v1/meeting_comments/{id}/:
+  /v1/meeting_comments/{id}/:
     get:
-      operationId: meeting_comments_retrieve
+      operationId: v1_meeting_comments_retrieve
       parameters:
       - in: path
         name: id
@@ -979,10 +947,9 @@ paths:
         description: A unique integer value identifying this meeting comment.
         required: true
       tags:
-      - meeting_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -991,7 +958,7 @@ paths:
                 $ref: '#/components/schemas/MeetingComment'
           description: ''
     put:
-      operationId: meeting_comments_update
+      operationId: v1_meeting_comments_update
       parameters:
       - in: path
         name: id
@@ -1000,25 +967,24 @@ paths:
         description: A unique integer value identifying this meeting comment.
         required: true
       tags:
-      - meeting_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/MeetingComment'
+              $ref: '#/components/schemas/MeetingCommentRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1027,7 +993,7 @@ paths:
                 $ref: '#/components/schemas/MeetingComment'
           description: ''
     patch:
-      operationId: meeting_comments_partial_update
+      operationId: v1_meeting_comments_partial_update
       parameters:
       - in: path
         name: id
@@ -1036,24 +1002,23 @@ paths:
         description: A unique integer value identifying this meeting comment.
         required: true
       tags:
-      - meeting_comments
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedMeetingComment'
+              $ref: '#/components/schemas/PatchedMeetingCommentRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedMeetingComment'
+              $ref: '#/components/schemas/PatchedMeetingCommentRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedMeetingComment'
+              $ref: '#/components/schemas/PatchedMeetingCommentRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedMeetingComment'
+              $ref: '#/components/schemas/PatchedMeetingCommentRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1062,7 +1027,7 @@ paths:
                 $ref: '#/components/schemas/MeetingComment'
           description: ''
     delete:
-      operationId: meeting_comments_destroy
+      operationId: v1_meeting_comments_destroy
       parameters:
       - in: path
         name: id
@@ -1071,16 +1036,15 @@ paths:
         description: A unique integer value identifying this meeting comment.
         required: true
       tags:
-      - meeting_comments
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/meetings/:
+  /v1/meetings/:
     get:
-      operationId: meetings_list
+      operationId: v1_meetings_list
       parameters:
       - name: filter[search]
         required: false
@@ -1107,10 +1071,9 @@ paths:
         schema:
           type: string
       tags:
-      - meetings
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1119,27 +1082,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedMeetingList'
           description: ''
     post:
-      operationId: meetings_create
+      operationId: v1_meetings_create
       tags:
-      - meetings
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -1147,9 +1109,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Meeting'
           description: ''
-  /api/v1/meetings/{id}/:
+  /v1/meetings/{id}/:
     get:
-      operationId: meetings_retrieve
+      operationId: v1_meetings_retrieve
       parameters:
       - in: path
         name: id
@@ -1158,10 +1120,9 @@ paths:
         description: A unique integer value identifying this meeting.
         required: true
       tags:
-      - meetings
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1170,7 +1131,7 @@ paths:
                 $ref: '#/components/schemas/Meeting'
           description: ''
     put:
-      operationId: meetings_update
+      operationId: v1_meetings_update
       parameters:
       - in: path
         name: id
@@ -1179,25 +1140,24 @@ paths:
         description: A unique integer value identifying this meeting.
         required: true
       tags:
-      - meetings
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Meeting'
+              $ref: '#/components/schemas/MeetingRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1206,7 +1166,7 @@ paths:
                 $ref: '#/components/schemas/Meeting'
           description: ''
     patch:
-      operationId: meetings_partial_update
+      operationId: v1_meetings_partial_update
       parameters:
       - in: path
         name: id
@@ -1215,24 +1175,23 @@ paths:
         description: A unique integer value identifying this meeting.
         required: true
       tags:
-      - meetings
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedMeeting'
+              $ref: '#/components/schemas/PatchedMeetingRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedMeeting'
+              $ref: '#/components/schemas/PatchedMeetingRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedMeeting'
+              $ref: '#/components/schemas/PatchedMeetingRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedMeeting'
+              $ref: '#/components/schemas/PatchedMeetingRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1241,7 +1200,7 @@ paths:
                 $ref: '#/components/schemas/Meeting'
           description: ''
     delete:
-      operationId: meetings_destroy
+      operationId: v1_meetings_destroy
       parameters:
       - in: path
         name: id
@@ -1250,16 +1209,15 @@ paths:
         description: A unique integer value identifying this meeting.
         required: true
       tags:
-      - meetings
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/members/:
+  /v1/members/:
     get:
-      operationId: members_list
+      operationId: v1_members_list
       parameters:
       - name: filter[search]
         required: false
@@ -1286,10 +1244,9 @@ paths:
         schema:
           type: string
       tags:
-      - members
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1298,27 +1255,26 @@ paths:
                 $ref: '#/components/schemas/PaginatedMemberList'
           description: ''
     post:
-      operationId: members_create
+      operationId: v1_members_create
       tags:
-      - members
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '201':
           content:
@@ -1326,9 +1282,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Member'
           description: ''
-  /api/v1/members/{id}/:
+  /v1/members/{id}/:
     get:
-      operationId: members_retrieve
+      operationId: v1_members_retrieve
       parameters:
       - in: path
         name: id
@@ -1337,10 +1293,9 @@ paths:
         description: A unique integer value identifying this member.
         required: true
       tags:
-      - members
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1349,7 +1304,7 @@ paths:
                 $ref: '#/components/schemas/Member'
           description: ''
     put:
-      operationId: members_update
+      operationId: v1_members_update
       parameters:
       - in: path
         name: id
@@ -1358,25 +1313,24 @@ paths:
         description: A unique integer value identifying this member.
         required: true
       tags:
-      - members
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Member'
+              $ref: '#/components/schemas/MemberRequest'
         required: true
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1385,7 +1339,7 @@ paths:
                 $ref: '#/components/schemas/Member'
           description: ''
     patch:
-      operationId: members_partial_update
+      operationId: v1_members_partial_update
       parameters:
       - in: path
         name: id
@@ -1394,24 +1348,23 @@ paths:
         description: A unique integer value identifying this member.
         required: true
       tags:
-      - members
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedMember'
+              $ref: '#/components/schemas/PatchedMemberRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedMember'
+              $ref: '#/components/schemas/PatchedMemberRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedMember'
+              $ref: '#/components/schemas/PatchedMemberRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedMember'
+              $ref: '#/components/schemas/PatchedMemberRequest'
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '200':
           content:
@@ -1420,7 +1373,7 @@ paths:
                 $ref: '#/components/schemas/Member'
           description: ''
     delete:
-      operationId: members_destroy
+      operationId: v1_members_destroy
       parameters:
       - in: path
         name: id
@@ -1429,16 +1382,15 @@ paths:
         description: A unique integer value identifying this member.
         required: true
       tags:
-      - members
+      - v1
       security:
       - basicAuth: []
-      - cookieAuth: []
       responses:
         '204':
           description: No response body
-  /api/v1/users/:
+  /v1/users/:
     get:
-      operationId: users_list
+      operationId: v1_users_list
       parameters:
       - name: filter[search]
         required: false
@@ -1465,7 +1417,7 @@ paths:
         schema:
           type: string
       tags:
-      - users
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -1476,23 +1428,23 @@ paths:
                 $ref: '#/components/schemas/PaginatedUserList'
           description: ''
     post:
-      operationId: users_create
+      operationId: v1_users_create
       tags:
-      - users
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
         required: true
       security:
       - basicAuth: []
@@ -1504,9 +1456,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: ''
-  /api/v1/users/{id}/:
+  /v1/users/{id}/:
     get:
-      operationId: users_retrieve
+      operationId: v1_users_retrieve
       parameters:
       - in: path
         name: id
@@ -1515,7 +1467,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - users
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -1526,7 +1478,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     put:
-      operationId: users_update
+      operationId: v1_users_update
       parameters:
       - in: path
         name: id
@@ -1535,21 +1487,21 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - users
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRequest'
         required: true
       security:
       - basicAuth: []
@@ -1561,7 +1513,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     patch:
-      operationId: users_partial_update
+      operationId: v1_users_partial_update
       parameters:
       - in: path
         name: id
@@ -1570,21 +1522,21 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - users
+      - v1
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: '#/components/schemas/PatchedUserRequest'
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: '#/components/schemas/PatchedUserRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: '#/components/schemas/PatchedUserRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: '#/components/schemas/PatchedUserRequest'
       security:
       - basicAuth: []
       responses:
@@ -1595,7 +1547,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
     delete:
-      operationId: users_destroy
+      operationId: v1_users_destroy
       parameters:
       - in: path
         name: id
@@ -1604,7 +1556,7 @@ paths:
         description: A unique integer value identifying this user.
         required: true
       tags:
-      - users
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -1647,6 +1599,27 @@ components:
       - meeting
       - updated_at
       - user
+    AttendeeRequest:
+      type: object
+      properties:
+        rsvp_type:
+          allOf:
+          - $ref: '#/components/schemas/RsvpTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        checked_in:
+          type: boolean
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        user:
+          type: integer
+        meeting:
+          type: integer
+      required:
+      - meeting
+      - user
     Award:
       type: object
       properties:
@@ -1668,6 +1641,19 @@ components:
       - badge_type
       - created_at
       - id
+      - user
+    AwardRequest:
+      type: object
+      properties:
+        badge_type:
+          allOf:
+          - $ref: '#/components/schemas/BadgeTypeEnum'
+          minimum: -2147483648
+          maximum: 2147483647
+        user:
+          type: integer
+      required:
+      - badge_type
       - user
     BadgeTypeEnum:
       enum:
@@ -1751,6 +1737,36 @@ components:
       - text
       - updated_at
       - user
+    GroupCommentRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          minLength: 1
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - group
+      - text
+      - user
+    GroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        department:
+          $ref: '#/components/schemas/DepartmentEnum'
+        class_number:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+      required:
+      - class_number
+      - name
     Location:
       type: object
       properties:
@@ -1785,6 +1801,28 @@ components:
       - longitude
       - room
       - updated_at
+    LocationRequest:
+      type: object
+      properties:
+        building:
+          type: string
+          minLength: 1
+          maxLength: 50
+        room:
+          type: string
+          minLength: 1
+          maxLength: 50
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      required:
+      - building
+      - latitude
+      - longitude
+      - room
     Meeting:
       type: object
       properties:
@@ -1848,6 +1886,43 @@ components:
       - text
       - updated_at
       - user
+    MeetingCommentRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          minLength: 1
+        user:
+          type: integer
+        meeting:
+          type: integer
+      required:
+      - meeting
+      - text
+      - user
+    MeetingRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        group:
+          type: integer
+          nullable: true
+        location:
+          type: integer
+      required:
+      - end_time
+      - location
+      - name
+      - start_time
     Member:
       type: object
       properties:
@@ -1875,6 +1950,20 @@ components:
       - group
       - id
       - updated_at
+      - user
+    MemberRequest:
+      type: object
+      properties:
+        creator:
+          type: boolean
+        editor:
+          type: boolean
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - group
       - user
     PaginatedAttendeeList:
       type: object
@@ -2083,12 +2172,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-    PatchedAttendee:
+    PatchedAttendeeRequest:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         rsvp_type:
           allOf:
           - $ref: '#/components/schemas/RsvpTypeEnum'
@@ -2100,43 +2186,36 @@ components:
           type: boolean
         editor:
           type: boolean
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
         user:
           type: integer
         meeting:
           type: integer
-    PatchedAward:
+    PatchedAwardRequest:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         badge_type:
           allOf:
           - $ref: '#/components/schemas/BadgeTypeEnum'
           minimum: -2147483648
           maximum: 2147483647
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
         user:
           type: integer
-    PatchedGroup:
+    PatchedGroupCommentRequest:
       type: object
       properties:
-        id:
+        text:
+          type: string
+          minLength: 1
+        user:
           type: integer
-          readOnly: true
+        group:
+          type: integer
+    PatchedGroupRequest:
+      type: object
+      properties:
         name:
           type: string
+          minLength: 1
           maxLength: 50
         department:
           $ref: '#/components/schemas/DepartmentEnum'
@@ -2144,45 +2223,16 @@ components:
           type: integer
           maximum: 2147483647
           minimum: -2147483648
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-    PatchedGroupComment:
+    PatchedLocationRequest:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        text:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        user:
-          type: integer
-        group:
-          type: integer
-    PatchedLocation:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
         building:
           type: string
+          minLength: 1
           maxLength: 50
         room:
           type: string
+          minLength: 1
           maxLength: 50
         latitude:
           type: number
@@ -2190,22 +2240,22 @@ components:
         longitude:
           type: number
           format: double
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-    PatchedMeeting:
+    PatchedMeetingCommentRequest:
       type: object
       properties:
-        id:
+        text:
+          type: string
+          minLength: 1
+        user:
           type: integer
-          readOnly: true
+        meeting:
+          type: integer
+    PatchedMeetingRequest:
+      type: object
+      properties:
         name:
           type: string
+          minLength: 1
           maxLength: 50
         start_time:
           type: string
@@ -2213,66 +2263,28 @@ components:
         end_time:
           type: string
           format: date-time
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
         group:
           type: integer
           nullable: true
         location:
           type: integer
-    PatchedMeetingComment:
+    PatchedMemberRequest:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        text:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
-        user:
-          type: integer
-        meeting:
-          type: integer
-    PatchedMember:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
         creator:
           type: boolean
         editor:
           type: boolean
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          readOnly: true
         user:
           type: integer
         group:
           type: integer
-    PatchedUser:
+    PatchedUserRequest:
       type: object
       properties:
         username:
           type: string
+          minLength: 1
           description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
             only.
           pattern: ^[\w.@+-]+$
@@ -2280,6 +2292,7 @@ components:
         password:
           type: string
           writeOnly: true
+          minLength: 1
           maxLength: 128
         email:
           type: string
@@ -2292,15 +2305,6 @@ components:
         last_name:
           type: string
           maxLength: 150
-        points:
-          type: integer
-          readOnly: true
-        is_superuser:
-          type: boolean
-          readOnly: true
-          title: Superuser status
-          description: Designates that this user has all permissions without explicitly
-            assigning them.
     RsvpTypeEnum:
       enum:
       - 0
@@ -2320,10 +2324,6 @@ components:
             only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
-        password:
-          type: string
-          writeOnly: true
-          maxLength: 128
         email:
           type: string
           format: email
@@ -2346,14 +2346,40 @@ components:
             assigning them.
       required:
       - is_superuser
-      - password
       - points
+      - username
+    UserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+          maxLength: 128
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - password
       - username
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-    cookieAuth:
-      type: apiKey
-      in: cookie
-      name: sessionid
+servers:
+- url: http://localhost:8000/api

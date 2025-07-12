@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# ------------------------------------------------------
+# INSTRUCTIONS
 # make executable with: chmod +x container-control.sh
 # Then use:
 #   ./container-control.sh build/start/stop...
+# ------------------------------------------------------
 
 set -e
 
@@ -51,6 +54,7 @@ case $COMMAND in
     ;;
 
   help|*)
+    echo ""
     echo "Usage: $0 {build|start|stop|stop-all|init|logs|cleanup}"
     echo ""
     echo "  build      Build, start, and run initial setup for database and web services"
@@ -60,6 +64,7 @@ case $COMMAND in
     echo "  init       Run initial setup for database (run after stop-all)"
     echo "  logs       Show container logs"
     echo "  cleanup    Remove containers, volumes, and images (complete reset)"
+    echo ""
     exit 1
     ;;
 esac

@@ -1,17 +1,22 @@
 # ----------------------------------------------
-# First Run:
-#   docker compose build --no-cache
-#   docker compose up -d db web
-#   docker compose run --rm init
-#
-# Subsequent Runs:
-#   docker compose up -d db web
-#
-# To Stop:
-#   docker compose down
-#
-# Or use container-control.sh
+# Please run containers with container-control.sh
 # ----------------------------------------------
+
+# -------------------------------
+# Shared Blocks
+# -------------------------------
+x-django-environment: &django-environment
+  POSTGRES_HOST: db
+  POSTGRES_DB: study_swamp_db
+  POSTGRES_USER: hero
+  POSTGRES_PASSWORD: password
+  POSTGRES_PORT: 5432
+
+x-app-volume: &app-volume
+  - .:/app
+
+x-app-dependencies: &app-dependencies
+  - db
 
 services:
 
@@ -24,16 +29,14 @@ services:
 
     # Environment variables used by the Postgres container
     environment:
-      POSTGRES_DB: study_swamp_db
-      POSTGRES_USER: hero
-      POSTGRES_PASSWORD: password
+      <<: *django-environment
 
     # Persist database data between container restarts
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
     # Expose Postgres port to the host machine (host:container)
-    # Using 5433 to deconflict with local PostgreSQL
+    # Using 5433 to deconflict with local DB and allow connection with Postico 2
     ports:
       - "5433:5432"
 
@@ -48,23 +51,17 @@ services:
 
     # Environment variables injected into Django
     environment:
-      POSTGRES_HOST: db
-      POSTGRES_DB: study_swamp_db
-      POSTGRES_USER: hero
-      POSTGRES_PASSWORD: password
-      POSTGRES_PORT: 5432
+      <<: *django-environment
 
     # Mounts the project directory into the container for live code changes
-    volumes:
-      - .:/app
+    volumes: *app-volume
 
     # Exposes the Django dev server on host port 8000
     ports:
       - "8000:8000"
 
     # Ensures the web service waits for db to start
-    depends_on:
-      - db
+    depends_on: *app-dependencies
 
   # ----------------------------------------------
   # Initial DB setup
@@ -82,24 +79,20 @@ services:
         python manage.py loaddata meeting.json &&
         python manage.py loaddata attendee.json &&
         python manage.py loaddata award.json &&
+        python manage.py loaddata group_comment.json &&
+        python manage.py loaddata meeting_comment.json &&
         python manage.py collectstatic --noinput
       "
 
     # Environment variables injected into Django
     environment:
-      POSTGRES_HOST: db
-      POSTGRES_DB: study_swamp_db
-      POSTGRES_USER: hero
-      POSTGRES_PASSWORD: password
-      POSTGRES_PORT: 5432
+      <<: *django-environment
 
     # Mounts the project directory into the container for live code changes
-    volumes:
-      - .:/app
+    volumes: *app-volume
 
     # Ensures the web service waits for db to start
-    depends_on:
-      - db
+    depends_on: *app-dependencies
 
 # ----------------------------------------------
 # Named Docker Volume for PostgreSQL Data

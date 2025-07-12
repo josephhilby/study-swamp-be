@@ -1,7 +1,9 @@
+# ---------------------------------------------
 # To remove newly added .gitignore files
 # git rm -r --cached .
 # git add .
 # git commit -m "Remove all files now ignored"
+# ---------------------------------------------
 
 # Python bytecode cache
 __pycache__/
@@ -17,6 +19,7 @@ __pycache__/
 .venv/
 
 # Environment variable files (if used)
+# Not currently used, but will be added if time allows
 .env/
 
 # VS Code editor settings
