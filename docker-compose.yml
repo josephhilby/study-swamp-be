@@ -79,6 +79,8 @@ services:
         python manage.py loaddata meeting.json &&
         python manage.py loaddata attendee.json &&
         python manage.py loaddata award.json &&
+        python manage.py loaddata group_comment.json &&
+        python manage.py loaddata meeting_comment.json &&
         python manage.py collectstatic --noinput
       "
 
