@@ -1,15 +1,14 @@
 # ------------------------
+# Exclude generated static files from language stats
+# ------------------------
+staticfiles/** linguist-detectable=false
+
+# ------------------------
 # Mark generated code
 # ------------------------
-# staticfiles
-staticfiles/** linguist-generated
-staticfiles/* linguist-generated
-
-# migrations
 */migrations/*.py linguist-generated
 !*/migrations/__init__.py linguist-generated=false
 
-# schema
 schema.yml linguist-generated
 
 # ------------------------
