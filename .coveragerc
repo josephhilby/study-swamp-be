@@ -1,0 +1,9 @@
+[run]
+source =
+    Study_Swamp_API
+
+[report]
+omit =
+    */tests/*
+    */migrations/*
+    */__init__.py

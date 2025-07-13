@@ -3,6 +3,7 @@ import factory
 import random
 from faker import Faker
 from Study_Swamp_API.models import *
+from django.utils import timezone
 
 faker = Faker()
 
@@ -63,9 +64,11 @@ class MeetingFactory(factory.django.DjangoModelFactory):
     group = factory.SubFactory(GroupFactory)
     location = factory.SubFactory(LocationFactory)
     name = factory.LazyAttribute(lambda x: faker.sentence(nb_words=5))
-    start_time = factory.LazyAttribute(lambda x: faker.date_time_this_month())
+    start_time = factory.LazyAttribute(
+        lambda x: timezone.make_aware(faker.date_time_this_month())
+    )
     end_time = factory.LazyAttribute(
-        lambda o: o.start_time + datetime.timedelta(hours=1)
+        lambda x: x.start_time + datetime.timedelta(hours=1)
     )
 
 
