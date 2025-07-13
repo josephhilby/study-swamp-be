@@ -42,7 +42,7 @@ class GroupFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Group
 
-    name = factory.LazyAttribute(lambda x: faker.catch_phrase())
+    name = factory.LazyAttribute(lambda x: faker.catch_phrase()[:50])
     department = factory.LazyAttribute(lambda x: random.choice(['MAS','CEN','COP']))
     class_number = factory.LazyAttribute(lambda x: faker.random_int(1000, 5999))
 
