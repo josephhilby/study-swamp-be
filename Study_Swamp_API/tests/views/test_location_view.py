@@ -32,7 +32,7 @@ class LocationViewTests(TestCase):
 
     def test_location_get_many(self):
         user = UserFactory(username='test', password='password')
-        location = LocationFactory()
+        LocationFactory.create_batch(3)
 
         credentials = base64.b64encode(b'test:password').decode('utf-8')
         auth_header = f'Basic {credentials}'
@@ -44,13 +44,9 @@ class LocationViewTests(TestCase):
 
         request.user = user
 
-        view = LocationViewSet.as_view({'get': 'retrieve'})
-        response = view(request, pk=location.pk)
+        view = LocationViewSet.as_view({'get': 'list'})
+        response = view(request)
         response.render()
 
         assert response.status_code == 200
-        assert len(response.data) == 7
-        assert response.data['building'] == location.building
-        assert response.data['room'] == location.room
-        assert response.data['latitude'] == float(location.latitude)
-        assert response.data['longitude'] == float(location.longitude)
+        assert len(response.data) == 3

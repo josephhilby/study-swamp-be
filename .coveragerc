@@ -7,3 +7,5 @@ omit =
     */tests/*
     */migrations/*
     */__init__.py
+    */apps.py
+    */admin.py
