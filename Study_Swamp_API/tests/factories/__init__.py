@@ -32,7 +32,7 @@ class LocationFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Location
 
-    building = factory.LazyAttribute(lambda x: faker.company())
+    building = factory.LazyAttribute(lambda x: faker.company()[:50])
     room = factory.LazyAttribute(lambda x: faker.bothify('Room ###'))
     latitude = factory.LazyAttribute(lambda x: faker.latitude())
     longitude = factory.LazyAttribute(lambda x: faker.longitude())
@@ -63,7 +63,7 @@ class MeetingFactory(factory.django.DjangoModelFactory):
 
     group = factory.SubFactory(GroupFactory)
     location = factory.SubFactory(LocationFactory)
-    name = factory.LazyAttribute(lambda x: faker.sentence(nb_words=5))
+    name = factory.LazyAttribute(lambda x: faker.sentence(nb_words=5)[:50])
     start_time = factory.LazyAttribute(
         lambda x: timezone.make_aware(faker.date_time_this_month())
     )
