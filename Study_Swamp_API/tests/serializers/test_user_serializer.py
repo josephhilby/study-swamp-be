@@ -1,15 +1,11 @@
 import pytest
 from django.test import TestCase
-from Study_Swamp_API.models import User
+from Study_Swamp_API.tests.factories import UserFactory
 from Study_Swamp_API.serializers import UserSerializer
 
-class TestUser(TestCase):
+class TestSerializerUser(TestCase):
     def setUp(self):
-        self.user = User(first_name="name",
-                         last_name="lastname",
-                         username="username",
-                         email="test@user.com",
-                         password="123", )
+        self.user = UserFactory()
         self.serialized_user = UserSerializer(self.user)
 
     def test_user_serialize(self):
