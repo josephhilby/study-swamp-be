@@ -8,7 +8,7 @@ class TestSerializerAttendee(TestCase):
         self.attendee = AttendeeFactory()
         self.serialized_attendee = AttendeeSerializer(self.attendee)
 
-    def test_meeting_serialize(self):
+    def test_attendee_serialize(self):
         data = self.serialized_attendee.data
         assert isinstance(data, dict)
         assert len(data) == 9

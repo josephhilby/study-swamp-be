@@ -8,7 +8,7 @@ class TestSerializerGroup(TestCase):
         self.group = GroupFactory()
         self.serialized_group = GroupSerializer(self.group)
 
-    def test_location_serialize(self):
+    def test_group_serialize(self):
         data = self.serialized_group.data
         assert isinstance(data, dict)
         assert len(data) == 6
