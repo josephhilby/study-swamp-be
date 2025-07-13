@@ -7,8 +7,8 @@ class LocationModelTests(TestCase):
     def setUp(self):
         self.location = LocationFactory(building='building')
 
-    def test_user_instance(self):
+    def test_location_instance(self):
         self.assertIsInstance(self.location, Location)
 
-    def test_user_state(self):
+    def test_location_state(self):
         assert self.location.building == "building"
