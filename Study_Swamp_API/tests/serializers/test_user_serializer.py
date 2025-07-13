@@ -3,6 +3,7 @@ from django.test import TestCase
 from Study_Swamp_API.tests.factories import UserFactory
 from Study_Swamp_API.serializers import UserSerializer
 
+
 class TestSerializerUser(TestCase):
     def setUp(self):
         self.user = UserFactory()

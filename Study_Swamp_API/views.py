@@ -1,12 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import (User, Location, Group,
-                     Member, Meeting, Attendee,
-                     Award, MeetingComment, GroupComment)
-from .serializers import (UserSerializer, LocationSerializer, GroupSerializer,
-                          MemberSerializer, MeetingSerializer, AttendeeSerializer,
-                          AwardSerializer, MeetingCommentSerializer,
-                          GroupCommentSerializer)
+from .serializers import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
