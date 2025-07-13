@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import (User, Location, Group,
-                     Member, Meeting, Attendee, Award,
-                     MeetingComment, GroupComment)
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):

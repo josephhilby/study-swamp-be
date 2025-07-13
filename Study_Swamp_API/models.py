@@ -99,7 +99,6 @@ class Award(models.Model):
         GATOR_DONE = 4, 'Gator Done'       # for marking checked_in at 5 meetings
         CHOMP_CHAMP = 5, 'Chomp Champ'     # for getting 100 points
 
-
     user = models.ForeignKey(User, related_name='awards', on_delete=models.CASCADE)
     badge_type = models.IntegerField(choices=BadgeType.choices)
     created_at = models.DateTimeField(auto_now_add=True)
