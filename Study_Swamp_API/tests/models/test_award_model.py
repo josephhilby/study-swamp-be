@@ -3,7 +3,7 @@ from Study_Swamp_API.models import Award
 from Study_Swamp_API.tests.factories import AwardFactory, UserFactory
 
 
-class MemberAwardTests(TestCase):
+class AwardModelTests(TestCase):
     def setUp(self):
         self.user = UserFactory()
         self.award = AwardFactory(user=self.user)

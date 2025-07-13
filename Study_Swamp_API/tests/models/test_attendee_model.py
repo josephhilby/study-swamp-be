@@ -3,7 +3,7 @@ from Study_Swamp_API.models import Attendee
 from Study_Swamp_API.tests.factories import AttendeeFactory, UserFactory
 
 
-class MemberAttendeeTests(TestCase):
+class AttendeeModelTests(TestCase):
     def setUp(self):
         self.user = UserFactory()
         self.attendee = AttendeeFactory(user=self.user)
