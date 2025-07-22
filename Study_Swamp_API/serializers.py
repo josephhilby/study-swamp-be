@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from datetime import timedelta
+from django.utils import timezone
 from .models import *
 
 
@@ -73,3 +75,18 @@ class GroupCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupComment
         fields = '__all__'
+
+    def create(self, validated_data):
+        # Time Delay to help avoid point farming
+        user = super().create(validated_data)
+        time_threshold = timezone.now() - timedelta(seconds=30)
+        recent_comment = GroupComment.objects.filter(
+            user=user,
+            created_at__gte=time_threshold
+        )
+        if not recent_comment.exists():
+            user.points += 10
+            user.save(update_fields=['points'])
+
+        comment = super().create(validated_data)
+        return comment

@@ -3,6 +3,11 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import *
 
 
+class AssignOnCreateMixin:
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
@@ -54,6 +59,6 @@ class MeetingCommentViewSet(viewsets.ModelViewSet):
     serializer_class = MeetingCommentSerializer
 
 
-class GroupCommentViewSet(viewsets.ModelViewSet):
+class GroupCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
     queryset = GroupComment.objects.all()
     serializer_class = GroupCommentSerializer
