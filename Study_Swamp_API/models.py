@@ -8,9 +8,10 @@ class User(AbstractUser):
 
     '''
     POINTS:
-      - 5 for joining a group
-      - 5 for RSVP 'ACCEPTED' to a meeting
-      - 10 for marking checked_in to a meeting
+      - Comment on group discussion: 10 points  (Upon POST group_comment)
+      - Join a study group: 50 points           (Upon POST attendee)
+      - Attend study session: 100 points        (Upon checked_in == T)
+      - Host/organize study session: 150 points (Upon POST attendee and creator == T)
     '''
     points = models.IntegerField(default=0)
 
@@ -97,7 +98,7 @@ class Award(models.Model):
         SNAP_TO_IT = 2, 'Snap to It!'      # for marking checked_in at first meeting
         TAILGATOR = 3, 'TailGATOR'         # for marking checked_in at a meeting that has no associated group
         GATOR_DONE = 4, 'Gator Done'       # for marking checked_in at 5 meetings
-        CHOMP_CHAMP = 5, 'Chomp Champ'     # for getting 100 points
+        CHOMP_CHAMP = 5, 'Chomp Champ'     # for getting 1000 points
 
     user = models.ForeignKey(User, related_name='awards', on_delete=models.CASCADE)
     badge_type = models.IntegerField(choices=BadgeType.choices)
