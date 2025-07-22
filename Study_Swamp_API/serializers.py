@@ -78,7 +78,7 @@ class GroupCommentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Time Delay to help avoid point farming
-        user = super().create(validated_data)
+        user = validated_data['user']
         time_threshold = timezone.now() - timedelta(seconds=30)
         recent_comment = GroupComment.objects.filter(
             user=user,

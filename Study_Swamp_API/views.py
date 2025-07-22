@@ -4,6 +4,9 @@ from .serializers import *
 
 
 class AssignOnCreateMixin:
+    """
+    Mixin to help prevent users from spoofing others.
+    """
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -49,12 +52,12 @@ class AttendeeViewSet(viewsets.ModelViewSet):
     serializer_class = AttendeeSerializer
 
 
-class AwardViewSet(viewsets.ModelViewSet):
+class AwardViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Award.objects.all()
     serializer_class = AwardSerializer
 
 
-class MeetingCommentViewSet(viewsets.ModelViewSet):
+class MeetingCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
     queryset = MeetingComment.objects.all()
     serializer_class = MeetingCommentSerializer
 
