@@ -8,7 +8,7 @@ htmlcov/** linguist-detectable=false
 # Mark generated code
 # ------------------------
 */migrations/*.py linguist-generated
-!*/migrations/__init__.py linguist-generated=false
+\!*/migrations/__init__.py linguist-generated=false
 
 schema.yml linguist-generated
 
