@@ -37,7 +37,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
-class MemberViewSet(viewsets.ModelViewSet):
+class MemberViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
 
@@ -47,14 +47,16 @@ class MeetingViewSet(viewsets.ModelViewSet):
     serializer_class = MeetingSerializer
 
 
-class AttendeeViewSet(viewsets.ModelViewSet):
+class AttendeeViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
     queryset = Attendee.objects.all()
     serializer_class = AttendeeSerializer
 
 
 class AwardViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Award.objects.all()
     serializer_class = AwardSerializer
+
+    def get_queryset(self):
+        return Award.objects.filter(user=self.request.user)
 
 
 class MeetingCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
