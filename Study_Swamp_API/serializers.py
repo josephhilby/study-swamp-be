@@ -4,6 +4,21 @@ from django.utils import timezone
 from .models import *
 
 
+def award_points(user, points):
+    user.points += points
+    user.save(update_fields=['points'])
+
+
+def award_points_time_delay(user, model, delay, points):
+    """
+    Awards points and adds a time delay to avoid farming.
+    """
+    time_threshold = timezone.now() + timedelta(seconds=delay)
+    recent = model.objects.filter(user=user, created_at__gt=time_threshold)
+    if not recent.exists():
+        award_points(user, points)
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -46,17 +61,51 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = validated_data['user']
+        award_points_time_delay(user, Member, 30, 50)
+        member = super().create(validated_data)
+        return member
+
 
 class MeetingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meeting
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+        meeting = super().create(validated_data)
+        Attendee.objects.create(
+            user=user,
+            meeting=meeting,
+            creator=True
+        )
+        return meeting
+
 
 class AttendeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendee
         fields = '__all__'
+
+    def create(self, validated_data):
+        user = validated_data['user']
+        creator = validated_data['creator']
+        if creator:
+            award_points_time_delay(user, Attendee, 30, 150)
+        attendee = super().create(validated_data)
+        return attendee
+
+    def update(self, instance, validated_data):
+        user = validated_data['user']
+        checked_in = validated_data['checked_in']
+
+        if checked_in:
+            award_points_time_delay(user, Attendee, 30, 100)
+
+        update = super().update(instance, validated_data)
+        return update
 
 
 class AwardSerializer(serializers.ModelSerializer):
@@ -77,16 +126,7 @@ class GroupCommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        # Time Delay to help avoid point farming
         user = validated_data['user']
-        time_threshold = timezone.now() - timedelta(seconds=30)
-        recent_comment = GroupComment.objects.filter(
-            user=user,
-            created_at__gte=time_threshold
-        )
-        if not recent_comment.exists():
-            user.points += 10
-            user.save(update_fields=['points'])
-
+        award_points_time_delay(user, GroupComment, 30, 10)
         comment = super().create(validated_data)
         return comment
