@@ -9,9 +9,9 @@ class User(AbstractUser):
     '''
     POINTS:
       - Comment on group discussion: 10 points  (Upon POST group_comment)
-      - Join a study group: 50 points           (Upon POST attendee)
-      - Attend study session: 100 points        (Upon checked_in == T)
-      - Host/organize study session: 150 points (Upon POST attendee and creator == T)
+      - Join a study group: 50 points           (Upon POST member)
+      - Attend study meeting: 100 points        (Upon checked_in == T)
+      - Create study meeting: 150 points        (Upon POST attendee and creator == T)
     '''
     points = models.IntegerField(default=0)
 
