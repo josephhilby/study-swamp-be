@@ -53,8 +53,8 @@ class UserSerializer(serializers.ModelSerializer):
         password = validated_data.pop('password')
         user = User(**validated_data)
         user.set_password(password)
-        grant_award(user, Award.BadgeType.EGG_TOOTH)
         user.save()
+        grant_award(user, Award.BadgeType.EGG_TOOTH)
         return user
 
 
@@ -69,11 +69,30 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = self.context['request'].user
+        group = super().create(validated_data)
+        data = {
+            'user': user.id,
+            'group': group.id,
+            'creator': True
+        }
+
+        serialize = MemberSerializer(
+            data=data,
+            context={**self.context, 'internal': True}
+        )
+
+        serialize.is_valid(raise_exception=True)
+        serialize.save()
+        return group
+
 
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = '__all__'
+        read_only_fields = ['creator']
 
     def create(self, validated_data):
         user = validated_data['user']
