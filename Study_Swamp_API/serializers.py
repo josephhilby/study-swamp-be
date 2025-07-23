@@ -4,9 +4,22 @@ from django.utils import timezone
 from .models import *
 
 
+def grant_award(user, award):
+    Award.objects.get_or_create(
+        user=user,
+        badge_type=award
+    )
+
+
 def award_points(user, points):
-    user.points += points
+    total = user.points + points
+    needs_chomp = total >= 1000 > user.points
+
+    user.points = total
     user.save(update_fields=['points'])
+
+    if needs_chomp:
+        grant_award(user, Award.BadgeType.CHOMP_CHAMP)
 
 
 def award_points_time_delay(user, model, delay, points):
@@ -40,6 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
         password = validated_data.pop('password')
         user = User(**validated_data)
         user.set_password(password)
+        grant_award(user, Award.BadgeType.EGG_TOOTH)
         user.save()
         return user
 
@@ -63,6 +77,7 @@ class MemberSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = validated_data['user']
+        grant_award(user, Award.BadgeType.FIRST_SPLASH)
         award_points_time_delay(user, Member, 30, 50)
         member = super().create(validated_data)
         return member
@@ -114,8 +129,16 @@ class AttendeeSerializer(serializers.ModelSerializer):
         user = validated_data['user']
         checked_in = validated_data['checked_in']
 
-        if checked_in:
+        if checked_in and not instance.checked_in:
             award_points_time_delay(user, Attendee, 30, 100)
+            grant_award(user, Award.BadgeType.FIRST_SPLASH)
+
+            if not instance.meeting.group_id:
+                grant_award(user, Award.BadgeType.TAILGATOR)
+
+            checked_in_count = Attendee.objects.filter(user=user, checked_in=True).count()
+            if checked_in_count == 4:
+                grant_award(user, Award.BadgeType.GATOR_DONE)
 
         update = super().update(instance, validated_data)
         return update
