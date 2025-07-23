@@ -10,7 +10,7 @@ router.register('groups', views.GroupViewSet)
 router.register('members', views.MemberViewSet)
 router.register('meetings', views.MeetingViewSet)
 router.register('attendees', views.AttendeeViewSet)
-router.register('awards', views.AwardViewSet)
+router.register('awards', views.AwardViewSet, basename='awards')
 router.register('meeting_comments', views.MeetingCommentViewSet)
 router.register('group_comments', views.GroupCommentViewSet)
 
