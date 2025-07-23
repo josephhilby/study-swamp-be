@@ -76,11 +76,19 @@ class MeetingSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
         meeting = super().create(validated_data)
-        Attendee.objects.create(
-            user=user,
-            meeting=meeting,
-            creator=True
+        data = {
+            'user': user.id,
+            'meeting': meeting.id,
+            'creator': True
+        }
+
+        serialize = AttendeeSerializer(
+            data=data,
+            context={**self.context, 'internal': True}
         )
+
+        serialize.is_valid(raise_exception=True)
+        serialize.save()
         return meeting
 
 
@@ -88,12 +96,17 @@ class AttendeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendee
         fields = '__all__'
+        read_only_fields = ['creator']
 
     def create(self, validated_data):
         user = validated_data['user']
-        creator = validated_data['creator']
-        if creator:
+        creator = self.initial_data.get('creator', False)
+
+        is_creator = creator is True and self.context.get('internal', False)
+        if is_creator:
             award_points_time_delay(user, Attendee, 30, 150)
+
+        validated_data['creator'] = is_creator
         attendee = super().create(validated_data)
         return attendee
 
