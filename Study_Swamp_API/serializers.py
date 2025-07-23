@@ -145,21 +145,23 @@ class AttendeeSerializer(serializers.ModelSerializer):
         return attendee
 
     def update(self, instance, validated_data):
-        user = validated_data['user']
-        checked_in = validated_data['checked_in']
+        user = instance.user
+        checked_in = validated_data.get('checked_in', instance.checked_in)
 
-        if checked_in and not instance.checked_in:
+        just_checked_in = checked_in and not instance.checked_in
+        update = super().update(instance, validated_data)
+
+        if just_checked_in:
             award_points_time_delay(user, Attendee, 30, 100)
-            grant_award(user, Award.BadgeType.FIRST_SPLASH)
+            grant_award(user, Award.BadgeType.SNAP_TO_IT)
 
             if not instance.meeting.group_id:
                 grant_award(user, Award.BadgeType.TAILGATOR)
 
             checked_in_count = Attendee.objects.filter(user=user, checked_in=True).count()
-            if checked_in_count == 4:
+            if checked_in_count == 5:
                 grant_award(user, Award.BadgeType.GATOR_DONE)
 
-        update = super().update(instance, validated_data)
         return update
 
 

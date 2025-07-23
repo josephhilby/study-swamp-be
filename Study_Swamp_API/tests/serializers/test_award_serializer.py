@@ -1,7 +1,8 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
-from Study_Swamp_API.models import Award, User
-from Study_Swamp_API.tests.factories import AwardFactory, UserFactory
+from Study_Swamp_API.models import Award, User, Attendee
+from Study_Swamp_API.tests.factories import AwardFactory, UserFactory, MeetingFactory, AttendeeFactory, GroupFactory, \
+    MemberFactory
 from Study_Swamp_API.serializers import AwardSerializer
 
 
@@ -41,23 +42,115 @@ class TestSerializerAward(TestCase):
         client = APIClient()
         client.force_authenticate(user=user)
 
+        awards = Award.objects.filter(user=user)
+        assert Award.objects.count() == 1
+
         response = client.post('/api/v1/groups/', {
             'name': 'group',
             'department': 'MAS',
             'class_number': 1234
         }, format='json')
 
-        assert response.status_code == 201, response.data
+        assert response.status_code == 201
 
         user.refresh_from_db()
         award = Award.objects.get(user=user)
         assert award.badge_type == Award.BadgeType.FIRST_SPLASH
 
-    # TO-DO: Test for Snap to It!
+    def test_award_snap_to_it(self):
+        user = UserFactory()
+        meeting = MeetingFactory()
+        attendee = AttendeeFactory(
+            user=user,
+            meeting=meeting,
+            checked_in=False
+        )
 
-    # TO-DO: Test for TailGATOR
+        client = APIClient()
+        client.force_authenticate(user=user)
 
-    # TO-DO: Test for Gator Done
+        assert attendee.checked_in == False
+        assert Award.objects.count() == 1
 
-    # TO-DO: Test for Chomp Champ
+        response = client.patch(f"/api/v1/attendees/{attendee.id}/", {
+            'checked_in': True
+        }, format='json')
 
+        assert response.status_code == 200
+
+        user.refresh_from_db()
+        awards = Award.objects.filter(user=user)
+        assert any(award.badge_type == Award.BadgeType.SNAP_TO_IT for award in awards)
+
+    def test_award_tail_gator(self):
+        user = UserFactory()
+        meeting = MeetingFactory(group=None)
+        attendee = AttendeeFactory(
+            user=user,
+            meeting=meeting,
+            checked_in=False
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        assert attendee.checked_in == False
+        assert Award.objects.count() == 1
+
+        response = client.patch(f"/api/v1/attendees/{attendee.id}/", {
+            'checked_in': True
+        }, format='json')
+
+        assert response.status_code == 200
+
+        user.refresh_from_db()
+        awards = Award.objects.filter(user=user)
+        assert any(award.badge_type == Award.BadgeType.TAILGATOR for award in awards)
+
+    def test_award_gator_done(self):
+        user = UserFactory()
+        meeting = MeetingFactory(group=None)
+        AttendeeFactory.create_batch(4, user=user, checked_in=True)
+        attendee = AttendeeFactory(
+            user=user,
+            meeting=meeting,
+            checked_in=False
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        assert attendee.checked_in == False
+        assert Award.objects.count() == 1
+
+        response = client.patch(f"/api/v1/attendees/{attendee.id}/", {
+            'checked_in': True
+        }, format='json')
+
+        assert response.status_code == 200
+
+        user.refresh_from_db()
+        awards = Award.objects.filter(user=user)
+        assert any(award.badge_type == Award.BadgeType.GATOR_DONE for award in awards)
+
+    def test_award_chomp_champ(self):
+        user = UserFactory(points=990)
+        group = GroupFactory()
+        member = MemberFactory(user=user, group=group)
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        assert Award.objects.count() == 1
+
+        response = client.post('/api/v1/group_comments/', {
+            'user': user.id,
+            'group': group.id,
+            'text': 'testing'
+        }, format='json')
+
+        assert response.status_code == 201
+
+        user.refresh_from_db()
+        awards = Award.objects.filter(user=user)
+        assert any(award.badge_type == Award.BadgeType.CHOMP_CHAMP for award in awards)
