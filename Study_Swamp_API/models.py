@@ -32,6 +32,7 @@ class Group(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
+    # TO-DO: add more department codes
     class DEPT(models.TextChoices):
         MAS = 'MAS', 'MAS'
         CEN = 'CEN', 'CEN'
