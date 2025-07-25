@@ -24,7 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.13.3"]
+        python-version: ["3.11.3"]
 
     env:
       POSTGRES_DB: study_swamp_db
