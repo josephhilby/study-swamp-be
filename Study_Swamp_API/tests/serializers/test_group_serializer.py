@@ -11,7 +11,8 @@ class TestSerializerGroup(TestCase):
     def test_group_serialize(self):
         data = self.serialized_group.data
         assert isinstance(data, dict)
-        assert len(data) == 6
+        assert len(data) == 7
         assert isinstance(data['name'], str)
         assert isinstance(data['department'], str)
         assert isinstance(data['class_number'], int)
+        assert isinstance(data['granted_awards'], list)

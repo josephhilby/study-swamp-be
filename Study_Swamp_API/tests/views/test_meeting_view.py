@@ -25,11 +25,12 @@ class MeetingViewTests(TestCase):
         response.render()
 
         assert response.status_code == 200
-        assert len(response.data) == 8
+        assert len(response.data) == 9
         assert response.data['group'] == meeting.group.pk
         assert response.data['location'] == meeting.location.pk
         assert parser.isoparse(response.data["start_time"]) == meeting.start_time
         assert parser.isoparse(response.data["end_time"]) == meeting.end_time
+        assert response.data['granted_awards'] == []
 
     def test_meeting_get_many(self):
         user = UserFactory(username='test', password='password')

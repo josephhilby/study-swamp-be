@@ -38,12 +38,22 @@ class TestSerializerAward(TestCase):
         assert award.badge_type == Award.BadgeType.EGG_TOOTH
 
     def test_award_first_splash(self):
-        user = UserFactory()
         client = APIClient()
+        client.post('/api/v1/users/', {
+            'first_name': 'first',
+            'last_name': 'last',
+            'username': 'cool-user-name',
+            'email': 'first.last@email.com',
+            'password': 'password',
+            'points': 0,
+            'is_superuser': False
+        }, format='json')
+
+        user = User.objects.get(username='cool-user-name')
         client.force_authenticate(user=user)
 
         awards = Award.objects.filter(user=user)
-        assert Award.objects.count() == 1
+        assert awards.count() == 1
 
         response = client.post('/api/v1/groups/', {
             'name': 'group',
@@ -52,10 +62,14 @@ class TestSerializerAward(TestCase):
         }, format='json')
 
         assert response.status_code == 201
+        data = response.json()
+        attributes = data['data']['attributes']
+        assert 'granted_awards' in attributes
+        assert 'First Splash' in attributes['granted_awards']
 
         user.refresh_from_db()
-        award = Award.objects.get(user=user)
-        assert award.badge_type == Award.BadgeType.FIRST_SPLASH
+        awards = Award.objects.filter(user=user)
+        assert any(award.badge_type == Award.BadgeType.FIRST_SPLASH for award in awards)
 
     def test_award_snap_to_it(self):
         user = UserFactory()
@@ -77,6 +91,10 @@ class TestSerializerAward(TestCase):
         }, format='json')
 
         assert response.status_code == 200
+        data = response.json()
+        attributes = data['data']['attributes']
+        assert 'granted_awards' in attributes
+        assert 'Snap to It!' in attributes['granted_awards']
 
         user.refresh_from_db()
         awards = Award.objects.filter(user=user)
@@ -102,6 +120,10 @@ class TestSerializerAward(TestCase):
         }, format='json')
 
         assert response.status_code == 200
+        data = response.json()
+        attributes = data['data']['attributes']
+        assert 'granted_awards' in attributes
+        assert 'TailGATOR' in attributes['granted_awards']
 
         user.refresh_from_db()
         awards = Award.objects.filter(user=user)
@@ -128,6 +150,10 @@ class TestSerializerAward(TestCase):
         }, format='json')
 
         assert response.status_code == 200
+        data = response.json()
+        attributes = data['data']['attributes']
+        assert 'granted_awards' in attributes
+        assert 'Gator Done' in attributes['granted_awards']
 
         user.refresh_from_db()
         awards = Award.objects.filter(user=user)
@@ -150,6 +176,10 @@ class TestSerializerAward(TestCase):
         }, format='json')
 
         assert response.status_code == 201
+        data = response.json()
+        attributes = data['data']['attributes']
+        assert 'granted_awards' in attributes
+        assert 'Chomp Champ' in attributes['granted_awards']
 
         user.refresh_from_db()
         awards = Award.objects.filter(user=user)

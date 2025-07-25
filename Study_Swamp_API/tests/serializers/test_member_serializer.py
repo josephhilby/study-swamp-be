@@ -11,11 +11,12 @@ class TestSerializerMember(TestCase):
     def test_member_serialize(self):
         data = self.serialized_member.data
         assert isinstance(data, dict)
-        assert len(data) == 7
+        assert len(data) == 8
         assert isinstance(data['user'], int)
         assert isinstance(data['group'], int)
         assert isinstance(data['creator'], bool)
         assert isinstance(data['editor'], bool)
+        assert isinstance(data['granted_awards'], list)
 
     def test_member_create(self):
         user = UserFactory()

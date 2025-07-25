@@ -13,13 +13,14 @@ class TestSerializerAttendee(TestCase):
     def test_attendee_serialize(self):
         data = self.serialized_attendee.data
         assert isinstance(data, dict)
-        assert len(data) == 9
+        assert len(data) == 10
         assert isinstance(data['user'], int)
         assert isinstance(data['meeting'], int)
         assert isinstance(data['rsvp_type'], int)
         assert isinstance(data['checked_in'], bool)
         assert isinstance(data['creator'], bool)
         assert isinstance(data['editor'], bool)
+        assert isinstance(data['granted_awards'], list)
 
     def test_attendee_auto_create(self):
         user = UserFactory()

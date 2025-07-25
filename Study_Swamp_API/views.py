@@ -6,9 +6,12 @@ from .serializers import *
 class AssignOnCreateMixin:
     """
     Mixin to help prevent users from spoofing others.
+    Bypass for superuser
     """
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        user = self.request.user
+        if not user.is_superuser:
+            serializer.save(user=user)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -56,7 +59,10 @@ class AwardViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AwardSerializer
 
     def get_queryset(self):
-        return Award.objects.filter(user=self.request.user)
+        user = self.request.user
+        if user.is_superuser:
+            return Award.objects.all()
+        return Award.objects.filter(user=user)
 
 
 class MeetingCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):

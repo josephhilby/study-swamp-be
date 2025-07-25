@@ -24,11 +24,12 @@ class MemberViewTests(TestCase):
         response.render()
 
         assert response.status_code == 200
-        assert len(response.data) == 7
+        assert len(response.data) == 8
         assert response.data['user'] == user.pk
         assert response.data['group'] == member.group.pk
         assert response.data['creator'] == member.creator
         assert response.data['editor'] == member.editor
+        assert response.data['granted_awards'] == []
 
     def test_member_get_many(self):
         user = UserFactory(username='test', password='password')

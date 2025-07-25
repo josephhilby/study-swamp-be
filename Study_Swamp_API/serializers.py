@@ -4,11 +4,27 @@ from django.utils import timezone
 from .models import *
 
 
+class GrantAwardMixin:
+    def get_granted_awards(self, obj):
+        user = getattr(obj, 'user', None)
+        if not user:
+            return []
+        return [
+            Award.BadgeType(badge).label
+            for badge in getattr(user, '_granted_awards', [])
+        ]
+
+
 def grant_award(user, award):
-    Award.objects.get_or_create(
+    obj, created = Award.objects.get_or_create(
         user=user,
         badge_type=award
     )
+
+    if created:
+        if not hasattr(user, '_granted_awards'):
+            user._granted_awards = []
+        user._granted_awards.append(award)
 
 
 def award_points(user, points):
@@ -64,13 +80,20 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GroupSerializer(serializers.ModelSerializer):
+class GroupSerializer(GrantAwardMixin, serializers.ModelSerializer):
+    granted_awards = serializers.SerializerMethodField()
     class Meta:
         model = Group
-        fields = '__all__'
+        fields = (
+            'id', 'name', 'department', 'class_number',
+            'created_at', 'updated_at', 'granted_awards'
+        )
 
     def create(self, validated_data):
         user = self.context['request'].user
+        if user.is_superuser:
+            return super().create(validated_data)
+
         group = super().create(validated_data)
         data = {
             'user': user.id,
@@ -84,31 +107,48 @@ class GroupSerializer(serializers.ModelSerializer):
         )
 
         serialize.is_valid(raise_exception=True)
-        serialize.save()
+        member = serialize.save()
+
+        group.user = member.user
+        group._granted_awards = getattr(user, '_granted_awards', [])
         return group
 
 
-class MemberSerializer(serializers.ModelSerializer):
+class MemberSerializer(GrantAwardMixin, serializers.ModelSerializer):
+    granted_awards = serializers.SerializerMethodField()
     class Meta:
         model = Member
-        fields = '__all__'
+        fields = (
+            'id', 'user', 'group', 'creator', 'editor',
+            'created_at', 'updated_at', 'granted_awards'
+        )
         read_only_fields = ['creator']
 
     def create(self, validated_data):
         user = validated_data['user']
+        if user.is_superuser:
+            return super().create(validated_data)
+
         grant_award(user, Award.BadgeType.FIRST_SPLASH)
         award_points_time_delay(user, Member, 30, 50)
         member = super().create(validated_data)
         return member
 
 
-class MeetingSerializer(serializers.ModelSerializer):
+class MeetingSerializer(GrantAwardMixin, serializers.ModelSerializer):
+    granted_awards = serializers.SerializerMethodField()
     class Meta:
         model = Meeting
-        fields = '__all__'
+        fields = (
+            'id', 'group', 'location', 'name', 'start_time',
+            'end_time', 'created_at', 'updated_at', 'granted_awards'
+        )
 
     def create(self, validated_data):
         user = self.context['request'].user
+        if user.is_superuser:
+            return super().create(validated_data)
+
         meeting = super().create(validated_data)
         data = {
             'user': user.id,
@@ -126,14 +166,22 @@ class MeetingSerializer(serializers.ModelSerializer):
         return meeting
 
 
-class AttendeeSerializer(serializers.ModelSerializer):
+class AttendeeSerializer(GrantAwardMixin, serializers.ModelSerializer):
+    granted_awards = serializers.SerializerMethodField()
     class Meta:
         model = Attendee
-        fields = '__all__'
+        fields = (
+            'id', 'user', 'meeting', 'rsvp_type', 'checked_in',
+            'creator', 'editor', 'created_at', 'updated_at',
+            'granted_awards'
+        )
         read_only_fields = ['creator']
 
     def create(self, validated_data):
         user = validated_data['user']
+        if user.is_superuser:
+            return super().create(validated_data)
+
         creator = self.initial_data.get('creator', False)
 
         is_creator = creator is True and self.context.get('internal', False)
@@ -146,6 +194,9 @@ class AttendeeSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         user = instance.user
+        if user.is_superuser:
+            return super().update(instance, validated_data)
+
         checked_in = validated_data.get('checked_in', instance.checked_in)
 
         just_checked_in = checked_in and not instance.checked_in
@@ -177,13 +228,20 @@ class MeetingCommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GroupCommentSerializer(serializers.ModelSerializer):
+class GroupCommentSerializer(GrantAwardMixin, serializers.ModelSerializer):
+    granted_awards = serializers.SerializerMethodField()
     class Meta:
         model = GroupComment
-        fields = '__all__'
+        fields = (
+            'user', 'group', 'text', 'created_at',
+            'updated_at', 'granted_awards'
+        )
 
     def create(self, validated_data):
         user = validated_data['user']
+        if user.is_superuser:
+            return super().create(validated_data)
+
         award_points_time_delay(user, GroupComment, 30, 10)
         comment = super().create(validated_data)
         return comment
