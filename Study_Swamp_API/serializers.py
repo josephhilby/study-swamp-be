@@ -245,3 +245,21 @@ class GroupCommentSerializer(GrantAwardMixin, serializers.ModelSerializer):
         award_points_time_delay(user, GroupComment, 30, 10)
         comment = super().create(validated_data)
         return comment
+
+
+class EnumSerializer(serializers.Serializer):
+    def to_representation(self, instance):
+        return {
+            'departments': [
+                {'value': c.value, 'label': c.label}
+                for c in Group._meta.get_field('department').choices
+            ],
+            'rsvp_types': [
+                {'value': c.value, 'label': c.label}
+                for c in Attendee.RSVP
+            ],
+            'badge_types': [
+                {'value': c.value, 'label': c.label}
+                for c in Award.BadgeType
+            ],
+        }
