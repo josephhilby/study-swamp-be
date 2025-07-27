@@ -24,10 +24,11 @@ class GroupViewTests(TestCase):
         response.render()
 
         assert response.status_code == 200
-        assert len(response.data) == 6
+        assert len(response.data) == 7
         assert response.data['name'] == group.name
         assert response.data['department'] == group.department
         assert response.data['class_number'] == group.class_number
+        assert response.data['granted_awards'] == []
 
     def test_group_get_many(self):
         user = UserFactory(username='test', password='password')

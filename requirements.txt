@@ -1,52 +1,86 @@
-asgiref==3.8.1
-asttokens==3.0.0
-attrs==25.3.0
-coverage==7.8.2
-decorator==5.2.1
-dj-database-url==2.3.0
-Django==5.2.1
-django-cors-headers==4.7.0
-django-filter==25.1
-djangorestframework==3.16.0
-djangorestframework-jsonapi==7.1.0
-drf-spectacular==0.28.0
-drf-spectacular-sidecar==2025.7.1
-executing==2.2.0
-factory_boy==3.3.3
-Faker==37.3.0
-gunicorn==23.0.0
-inflection==0.5.1
-iniconfig==2.1.0
-ipdb==0.13.13
-ipython==9.3.0
-ipython_pygments_lexers==1.1.1
-jedi==0.19.2
-jsonschema==4.24.0
-jsonschema-specifications==2025.4.1
-matplotlib-inline==0.1.7
-packaging==25.0
-parso==0.8.4
-pexpect==4.9.0
-pluggy==1.6.0
-prompt_toolkit==3.0.51
-psycopg2-binary==2.9.10
-ptyprocess==0.7.0
-pure_eval==0.2.3
-Pygments==2.19.1
-pytest==8.3.5
-pytest-cov==6.2.1
-pytest-django==4.11.1
-pytest-factoryboy==2.7.0
-pytest-spec==4.0.0
-python-dateutil==2.9.0.post0
-PyYAML==6.0.2
-referencing==0.36.2
-rpds-py==0.26.0
-six==1.17.0
-sqlparse==0.5.3
-stack-data==0.6.3
-traitlets==5.14.3
-typing_extensions==4.13.2
-tzdata==2025.2
-uritemplate==4.2.0
-wcwidth==0.2.13
+# ========================
+# Core Django Dependencies
+# ========================
+Django==5.2.1                        # Web framework
+asgiref==3.8.1                       # ASGI support for Django
+sqlparse==0.5.3                      # SQL parsing used by Django
+tzdata==2025.2                       # Time zone data for timezone-aware apps
+
+# =====================
+# Django Extensions & Add-ons
+# =====================
+dj-database-url==2.3.0               # Parses database URLs from environment
+django-cors-headers==4.7.0           # Handles Cross-Origin Resource Sharing (CORS)
+django-filter==25.1                  # Filtering support for DRF
+djangorestframework==3.16.0          # Django REST Framework
+djangorestframework-jsonapi==7.1.0   # JSON:API support for DRF
+drf-spectacular==0.28.0              # OpenAPI 3 schema generation for DRF
+drf-spectacular-sidecar==2025.7.1    # Frontend UI for DRF schema
+
+# ====================
+# Production Server
+# ====================
+gunicorn==23.0.0                     # WSGI HTTP server for deployment
+psycopg2-binary==2.9.10              # PostgreSQL adapter for Python
+
+# ===================
+# Testing Dependencies
+# ===================
+pytest==8.3.5                        # Testing framework
+pytest-django==4.11.1                # Django integration with pytest
+pytest-cov==6.2.1                    # Coverage reporting with pytest
+pytest-factoryboy==2.7.0             # FactoryBoy integration with pytest
+pytest-spec==4.0.0                   # Spec-style test output
+coverage==7.8.2                      # Test coverage measurement
+
+# ===================
+# Test Data Factories
+# ===================
+factory_boy==3.3.3                   # Test data factories
+Faker==37.3.0                        # Fake data generation
+
+# ===========================
+# Development / Debugging Tools
+# ===========================
+ipdb==0.13.13                        # Debugging tool
+ipython==9.3.0                       # Interactive Python shell
+ipython_pygments_lexers==1.1.1       # Extra lexers for IPython
+Pygments==2.19.1                     # Syntax highlighting
+jedi==0.19.2                         # Autocompletion engine
+parso==0.8.4                         # Parser used by Jedi
+matplotlib-inline==0.1.7             # Jupyter backend integration
+prompt_toolkit==3.0.51               # Used by IPython shell
+traitlets==5.14.3                    # Configuration system for IPython
+wcwidth==0.2.13                      # Text rendering width (used in terminals)
+
+# ============================
+# Internal Python Utilities
+# ============================
+asttokens==3.0.0                     # AST parsing tokens
+decorator==5.2.1                     # Function decorators
+executing==2.2.0                     # Executing node info for ASTs
+pure_eval==0.2.3                     # Pure expression evaluation
+stack-data==0.6.3                    # Stack frame inspection
+inflection==0.5.1                    # String transformation utilities
+iniconfig==2.1.0                     # Config parsing for pytest
+attrs==25.3.0                        # Declarative class attributes
+typing_extensions==4.13.2            # Backport of typing improvements
+six==1.17.0                          # Python 2 and 3 compatibility
+packaging==25.0                      # Version parsing and dependency resolution
+
+# ===================
+# Terminal and OS Utilities
+# ===================
+pexpect==4.9.0                       # Control subprocesses on POSIX
+ptyprocess==0.7.0                    # Pseudo-terminal support for pexpect
+
+# ==========================
+# JSON Schema / YAML Support
+# ==========================
+jsonschema==4.24.0                   # JSON Schema validation
+jsonschema-specifications==2025.4.1  # Schema specs for JSON Schema
+referencing==0.36.2                  # Used internally for referencing in JSON schema
+rpds-py==0.26.0                      # Immutable data structures for JSON schema
+PyYAML==6.0.2                        # YAML parsing and serialization
+uritemplate==4.2.0                   # URI template parsing (used by OpenAPI tools)
+python-dateutil==2.9.0.post0         # Date/time parsing

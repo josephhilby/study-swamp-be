@@ -30,7 +30,8 @@ class AwardViewTests(TestCase):
 
     def test_award_get_many(self):
         user = UserFactory(username='test', password='password')
-        AwardFactory.create_batch(3)
+        AwardFactory.create_batch(3, user=user)
+        AwardFactory.create_batch(2)
 
         credentials = base64.b64encode(b'test:password').decode('utf-8')
         auth_header = f'Basic {credentials}'

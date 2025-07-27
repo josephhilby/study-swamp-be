@@ -24,13 +24,14 @@ class AttendeeViewTests(TestCase):
         response.render()
 
         assert response.status_code == 200
-        assert len(response.data) == 9
+        assert len(response.data) == 10
         assert response.data['user'] == user.pk
         assert response.data['meeting'] == attendee.meeting.pk
         assert response.data['rsvp_type'] == attendee.rsvp_type
         assert response.data['checked_in'] == attendee.checked_in
         assert response.data['creator'] == attendee.creator
         assert response.data['editor'] == attendee.editor
+        assert response.data['granted_awards'] == []
 
     def test_attendee_get_many(self):
         user = UserFactory(username='test', password='password')

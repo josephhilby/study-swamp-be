@@ -11,9 +11,10 @@ class TestSerializerMeeting(TestCase):
     def test_meeting_serialize(self):
         data = self.serialized_meeting.data
         assert isinstance(data, dict)
-        assert len(data) == 8
+        assert len(data) == 9
         assert isinstance(data['group'], int)
         assert isinstance(data['location'], int)
         assert isinstance(data['name'], str)
         assert isinstance(data['start_time'], str)
         assert isinstance(data['start_time'], str)
+        assert isinstance(data['granted_awards'], list)
