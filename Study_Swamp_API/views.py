@@ -1,4 +1,6 @@
-from rest_framework import viewsets
+from enum import Enum
+
+from rest_framework import viewsets, views, response, renderers
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import *
 
@@ -73,3 +75,27 @@ class MeetingCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
 class GroupCommentViewSet(AssignOnCreateMixin, viewsets.ModelViewSet):
     queryset = GroupComment.objects.all()
     serializer_class = GroupCommentSerializer
+
+
+class EnumViewSet(views.APIView):
+    permission_classes = [AllowAny]
+    renderer_classes = [renderers.JSONRenderer, renderers.BrowsableAPIRenderer]
+
+    def get(self, request):
+        enums = {
+            "departments": [
+                {"value": c.value, "label": c.label} for c in Group.DEPT
+            ],
+            "rsvp_types": [
+                {"value": c.value, "label": c.label} for c in Attendee.RSVP
+            ],
+            "badge_types": [
+                {"value": c.value, "label": c.label} for c in Award.BadgeType
+            ]
+        }
+
+        return response.Response({
+            "data": {
+                "enums": enums
+            }
+        })

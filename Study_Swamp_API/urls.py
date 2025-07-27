@@ -17,6 +17,7 @@ router.register('group_comments', views.GroupCommentViewSet)
 urlpatterns = [
 	# DRF API endpoints
 	path('api/v1/', include(router.urls)),
+	path('api/enums/', views.EnumViewSet.as_view(), name='enum-list'),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 	# Schema view (OpenAPI spec in JSON or YAML)
