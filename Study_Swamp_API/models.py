@@ -32,11 +32,17 @@ class Group(models.Model):
     class Meta:
         app_label = 'Study_Swamp_API'
 
-    # TO-DO: add more department codes
     class DEPT(models.TextChoices):
         MAS = 'MAS', 'MAS'
         CEN = 'CEN', 'CEN'
         COP = 'COP', 'COP'
+        EGN = 'EGN', 'EGN'
+        EEL = 'EEL', 'EEL'
+        CIS = 'CIS', 'CIS'
+        STA = 'STA', 'STA'
+        MAC = 'MAC', 'MAC'
+        PHY = 'PHY', 'PHY'
+        CHM = 'CHM', 'CHM'
 
     name = models.CharField(max_length=50, unique=True)
     department = models.TextField(choices=DEPT.choices, default=DEPT.MAS)
