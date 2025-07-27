@@ -38,7 +38,7 @@ class Group(models.Model):
         CEN = 'CEN', 'CEN'
         COP = 'COP', 'COP'
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     department = models.TextField(choices=DEPT.choices, default=DEPT.MAS)
     class_number = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
